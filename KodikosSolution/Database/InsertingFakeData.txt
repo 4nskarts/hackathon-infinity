@@ -1,0 +1,44 @@
+-- Insert sample companies
+INSERT INTO Companies (Name) VALUES
+('Company A'),
+('Company B'),
+('Company C'),
+('Company D'),
+('Company E');
+
+-- Insert sample employees for each company
+INSERT INTO Employees (Company_Id, FirstName, LastName, Email, Phone, IsAdmin, HashedPassword) VALUES
+-- Company A
+(1, 'John', 'Doe', 'john.doe@companyA.com', '123-456-7890', 1, 'hashedpassword1'),
+(1, 'Jane', 'Smith', 'jane.smith@companyA.com', '987-654-3210', 0, 'hashedpassword2'),
+(1, 'Jim', 'Brown', 'jim.brown@companyA.com', '111-222-3333', 0, 'hashedpassword3'),
+(1, 'Jessica', 'White', 'jessica.white@companyA.com', '444-555-6666', 0, 'hashedpassword4'),
+(1, 'Jack', 'Johnson', 'jack.johnson@companyA.com', '777-888-9999', 0, 'hashedpassword5'),
+
+-- Company B
+(2, 'Alice', 'Johnson', 'alice.johnson@companyB.com', '555-123-7890', 1, 'hashedpassword6'),
+(2, 'Bob', 'Miller', 'bob.miller@companyB.com', '789-321-6540', 0, 'hashedpassword7'),
+(2, 'Betty', 'Clark', 'betty.clark@companyB.com', '000-111-2222', 0, 'hashedpassword8'),
+(2, 'Brad', 'Turner', 'brad.turner@companyB.com', '333-444-5555', 0, 'hashedpassword9'),
+(2, 'Brenda', 'Reed', 'brenda.reed@companyB.com', '666-777-8888', 0, 'hashedpassword10'),
+
+-- Company C
+(3, 'Charlie', 'Williams', 'charlie.williams@companyC.com', '111-222-3330', 1, 'hashedpassword11'),
+(3, 'David', 'Brown', 'david.brown@companyC.com', '444-555-6660', 0, 'hashedpassword12'),
+(3, 'Diana', 'Johnson', 'diana.johnson@companyC.com', '777-888-9990', 0, 'hashedpassword13'),
+(3, 'Derek', 'Smith', 'derek.smith@companyC.com', '000-111-2220', 0, 'hashedpassword14'),
+(3, 'Donna', 'Anderson', 'donna.anderson@companyC.com', '333-444-5550', 0, 'hashedpassword15'),
+
+-- Company D
+(4, 'Eva', 'Anderson', 'eva.anderson@companyD.com', '777-888-9990', 1, 'hashedpassword16'),
+(4, 'Frank', 'Jones', 'frank.jones@companyD.com', '000-999-8880', 0, 'hashedpassword17'),
+(4, 'Fiona', 'White', 'fiona.white@companyD.com', '111-222-3330', 0, 'hashedpassword18'),
+(4, 'Freddie', 'Taylor', 'freddie.taylor@companyD.com', '444-555-6660', 0, 'hashedpassword19'),
+(4, 'Faith', 'Miller', 'faith.miller@companyD.com', '777-888-9990', 0, 'hashedpassword20'),
+
+-- Company E
+(5, 'Grace', 'Moore', 'grace.moore@companyE.com', '666-333-2220', 1, 'hashedpassword21'),
+(5, 'Harry', 'Taylor', 'harry.taylor@companyE.com', '333-666-9990', 0, 'hashedpassword22'),
+(5, 'Gina', 'Clark', 'gina.clark@companyE.com', '111-444-7770', 0, 'hashedpassword23'),
+(5, 'George', 'Brown', 'george.brown@companyE.com', '888-555-2220', 0, 'hashedpassword24'),
+(5, 'Gerald', 'Johnson', 'gerald.johnson@companyE.com', '666-333-0000', 0, 'hashedpassword25');

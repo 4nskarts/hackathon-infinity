@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
+    <ProjectReference Include="..\Kodikos.Models\Kodikos.Models.csproj" />
   </ItemGroup>
 
 </Project>
