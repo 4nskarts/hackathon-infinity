@@ -1,9 +1,16 @@
+using Kodikos.API.Data;
+using Kodikos.API.Repositories.Implimentations;
+using Kodikos.API.Repositories.Interfaces;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddDbContext<KodikosDbContext>();
+builder.Services.AddScoped< IEmployeeRepository , EmployeeRepository >();
+builder.Services.AddScoped< IBlogRepository     , BlogRepository     >();
 
 var app = builder.Build();
 

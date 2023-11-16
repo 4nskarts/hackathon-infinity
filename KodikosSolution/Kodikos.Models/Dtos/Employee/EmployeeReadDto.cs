@@ -13,7 +13,6 @@ namespace Kodikos.Models.Dtos.Employee
 
         public int EmployeeId { get; set; }
 
-
         public int? CompanyId { get; set; }
 
         [StringLength(50)]
@@ -30,8 +29,6 @@ namespace Kodikos.Models.Dtos.Employee
 
         public bool? IsAdmin { get; set; }
 
-        [StringLength(100)]
-        public string? HashedPassword { get; set; }
 
     }
 }
