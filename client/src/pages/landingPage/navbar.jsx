@@ -69,7 +69,7 @@ function Navbar() {
       {isSidebarOpen && (
         <div className="md:hidden fixed top-0 left-0 h-full w-50 bg-gray-800 text-white p-4 flex flex-col open">
           <div className="mb-8">
-            <a href="#HOME" className="block py-2 font-semibold text-sm" onClick={closeSidebar}>
+            <a href="#HOME" className="block py-2 font-h5 text-sm" onClick={closeSidebar}>
               HOME
             </a>
             <a href="#EVENTS" className="block py-2 font-semibold text-sm" onClick={closeSidebar}>
