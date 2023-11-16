@@ -1,0 +1,29 @@
+CREATE TABLE Companies (
+    Company_Id INT PRIMARY KEY IDENTITY,
+    Name NVARCHAR(70) NOT NULL
+);
+
+CREATE TABLE Employees (
+    Employee_Id INT PRIMARY KEY IDENTITY,
+    Company_Id INT REFERENCES Companies(Company_Id),
+    FirstName NVARCHAR(50) NOT NULL,
+    LastName NVARCHAR(50) NOT NULL,
+    Email NVARCHAR(255) UNIQUE,
+    Phone NVARCHAR(20),
+    IsAdmin BIT,
+    HashedPassword NVARCHAR(100)
+);
+
+CREATE TABLE Issues (
+    Issue_Id INT PRIMARY KEY IDENTITY,
+    Writer_Id INT REFERENCES Employees(Employee_Id),
+    Title NVARCHAR(100) NOT NULL,
+    Body NVARCHAR(1000)
+);
+
+CREATE TABLE Blogs (
+    Blog_Id INT PRIMARY KEY IDENTITY,
+    Writer_Id INT REFERENCES Employees(Employee_Id),
+    Issue_Id INT REFERENCES Issues(Issue_Id),
+    Body NVARCHAR(4000) NOT NULL
+);
