@@ -1,30 +1,33 @@
-import PrimaryButton from "../../../components/PrimaryButton";
-import SecondaryButton from "../../../components/SecondaryButton";
-import shape from '../styles/assets/Group 1.svg'
-import shape2 from '../styles/assets/Vector 1.svg'
-import shape3 from '../styles/assets/Staffing_Company_in_Albany__OR-removebg-preview 1.svg'
+import ThirdButton from "../../../components/ThirdButton";
+import FourthButton from "../../../components/FourthButton";
+import shape from "../styles/assets/Group 1.svg";
+import shape2 from "../styles/assets/Vector 1.svg";
+import shape3 from "../styles/assets/Ppl2.svg";
 function Hero() {
-  return (
-    <section className="h-[130vh] pt-16 flex flex-col md:flex-row px-12 justify-around items-center font-Quicksand">
-      <div className="flex flex-col md:w-[457px] mr-0 md:mr-[20rem]">
-        <h1 className="z-50 text-5xl text-left md:text-left md:text-5xl lg:text-6xl font-quicksand font-bold mb-6 leading-tight mr-0 md:mr-12">
-        Elevate <span className="text-blue">collaboration</span> with <span className="text-blue">Knowledge</span> Sharing
-        </h1>
-        <p className="z-50 text-xl text-center md:text-left md:text-base mb-8">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem
-          corporis veniam harum? Tenetur ullam veniam
-        </p>
-        <div className="z-50 flex flex-col md:flex-row gap-4">
-          <PrimaryButton text="Start Free Trial" />
-          <SecondaryButton text="For Your Company" />
-        </div>
-      </div>
-      <img src={shape3} className="absolute top-32 right-12 z-40 hidden md:block  w-full md:w-[457px] h-[457px]"/>
-      <img src={shape} className="absolute top-4 left-0 z-0" />
-      <img src={shape2} className="absolute hidden md:block top-4 right-12 z-0" />
-      
-    </section>
-  );
+    return (
+        <section className="h-screen pt-16 flex px-10 md:px-[7.5rem] justify-center mlm:justify-between items-stretch font-Quicksand">
+            <div className="flex flex-col justify-around w-11/12 md:w-6/12 lg:w-5/12 py-20">
+                <h1 className="z-50  text-4xl lg:text-5xl m-0 text-left font-quicksand font-bold leading-tight">
+                    Elevate 
+                    collaboration with
+                    <span className="text-blue"> Knowledge</span> Sharing
+                </h1>
+                <p className="z-50 text-xl text-left md:text-base">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    Autem corporis veniam harum? Tenetur ullam veniam
+                </p>
+                <div className="z-50 flex gap-4 flex-col lg:flex-row">
+                    <ThirdButton text="Start Free Trial" />
+                    <FourthButton text="For Your Company" />
+                </div>
+            </div>
+            <div className="w-[260px] lg:w-[340px] hidden mlm:flex h-[280px] lg:h-[360px] self-center justify-center items-center">
+                <img src={shape3} className="w-100 h-100" />
+            </div>
+            {/* <img src={shape} className="absolute top-4 left-0 z-0" /> */}
+            {/* <img src={shape2} className="absolute hidden md:block top-4 right-12 z-0" /> */}
+        </section>
+    );
 }
 
 export default Hero;
