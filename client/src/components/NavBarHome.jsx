@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import PrimaryButton from "./PrimaryButton";
 import ThirdButton from "./ThirdButton";
-// SearchBar.js
 
 const SearchBar = () => {
   return (
@@ -15,7 +14,7 @@ const SearchBar = () => {
       />
       <button className="absolute right-3 top-2 focus:outline-none">
         {/* You can use an icon here, like a search icon */}
-        Search
+        🔍
       </button>
     </div>
   );
