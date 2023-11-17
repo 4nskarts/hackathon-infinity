@@ -1,44 +1,25 @@
-import React from "react";
 import "./index.css";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import LandingPage from "./pages/LandingPage"; 
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import LandingPage from "./pages/LandingPage";
 import LoginPage from "./pages/LoginPage/index";
 import Home from "./pages/HomePage/Home";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import BlogPage from "./pages/BlogPage/BlogPage";
-/* import LoginPage from "./pages/LoginPage/LoginPage"; */
 
 // This is static now, don't remove it
 
-const users = Array.from({ length: 10 }, (_, index) => ({
-  name: `dolor voluptate eius ${index + 1}`,
-  profilePicture: `https://i.pinimg.com/originals/ca/ee/1b/caee1b81073f470a00c9b79c5f0b17cb.jpg`,
-}));
-
-// Example data for 10 issues
-const issues = Array.from({ length: 10 }, (_, index) => ({
-  title: `Consequatur sit hic. ${index + 1}`,
-  description: `Velit qui corrupti necessitatibus earum consequatur ea deleniti ipsam. Distinctio  ${
-    index + 1
-  }`,
-  postedTime: "2023-01-01T12:00:00Z",
-  tags: [`#tag${index + 1}`, `#tag${index + 2}`],
-}));
-
 function App() {
-  return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/home" element={<Home users={users} issues={issues} />} />
-        <Route path="/profile" element={<ProfilePage />} />
-        <Route path="/blog" element={<BlogPage issues={issues} />} />
-        {/* <Route path="/login/company" element={<LoginPageCompany />} />
-        <Route path="/login/employee" element={<LoginPageEmployee />} /> */}
-      </Routes>
-    </Router>
-  );
+    return (
+        <Router>
+            <Routes>
+                <Route path="/" element={<LandingPage />} />
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/home" element={<Home />} />
+                <Route path="/profile" element={<ProfilePage />} />
+                <Route path="/blog" element={<BlogPage />} />
+            </Routes>
+        </Router>
+    );
 }
 
 export default App;

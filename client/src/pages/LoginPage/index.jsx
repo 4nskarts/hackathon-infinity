@@ -1,32 +1,31 @@
 import React, { useState } from "react";
-import { setJWT } from "../../helpers/auth";
+import { setUser } from "../../helpers/auth";
 import { useNavigate } from "react-router-dom";
+import { url } from "../../helpers/url";
 
 function LoginPage() {
     const navigate = useNavigate();
     const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");l
+    const [password, setPassword] = useState("");
     const [asCompany, setAsCompany] = useState(false);
-
     const loginClickHandler = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch(
-                "https://23fd-154-121-43-118.ngrok-free.app/infinity/Employee/login",
-                {
-                    method: "POST",
-                    headers: {
-                        "content-type": "text/json",
-                    },
-                    body: JSON.stringify({
-                        email: username,
-                        password: password,
-                    }),
-                }
-            );
-            const data = await response.text();
-            if (data) setJWT(data);
-            navigate("/home");
+            const response = await fetch(`${url}/infinity/Employee/login`, {
+                method: "POST",
+                headers: {
+                    "content-type": "text/json",
+                },
+                body: JSON.stringify({
+                    email: username,
+                    password: password,
+                }),
+            });
+            const data = await response.json();
+            if (data) {
+                setUser(data);
+                navigate("/home");
+            }
         } catch (e) {}
     };
     return (

@@ -1,9 +1,10 @@
-export function setJWT(token) {
-    localStorage.setItem("jwt_token", token);
+export function setUser(user) {
+    localStorage.setItem("user", JSON.stringify(user));
 }
-export function getJWT() {
-    return localStorage.getItem("jwt_token");
+export function getUser() {
+    const user = localStorage.getItem("user");
+    if (user) return JSON.parse(user);
 }
-export function removeJWT() {
-    localStorage.removeItem("jwt_token");
+export function removeUser() {
+    localStorage.removeItem("user");
 }
