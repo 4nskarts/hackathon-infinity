@@ -2,8 +2,8 @@
 
 import React, { useState } from "react";
 import NavbarHome from "../../components/NavBarHome";
-import Modal from "react-modal";
 import "./Card.css";
+import { Link } from "react-router-dom";
 
 const Home = ({ users, issues }) => {
   const formatDate = (date) => {
@@ -126,9 +126,11 @@ const Home = ({ users, issues }) => {
                     </span>
                   ))}
                 </div>
-                <button className="bg-[#FFD500] text-black py-1 px-4 mt-4 rounded-lg">
-                  Answer
-                </button>
+                <Link to={"/blog"}>
+                  <button className="bg-[#FFD500] text-black py-1 px-4 mt-4 rounded-lg">
+                    Answer
+                  </button>
+                </Link>
               </div>
             </div>
           ))}

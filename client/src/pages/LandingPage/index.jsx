@@ -17,7 +17,7 @@ function LandingPage() {
         <Hero />
         {/* <CallToAction /> */}
         <Features />
-        <About />
+        {/* <About /> */}
         <Testimonial />
         {/* <SocialProof /> */}
         {/* <Statistics /> */}
