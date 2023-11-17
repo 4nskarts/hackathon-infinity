@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Kodikos.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("infinity/[controller]")]
     [ApiController]
     public class IssueController : ControllerBase
     {

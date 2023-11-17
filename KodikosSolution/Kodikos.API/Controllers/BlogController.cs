@@ -9,7 +9,7 @@ using System.Collections.Generic;
 
 namespace Kodikos.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("infinity/[controller]")]
     [ApiController]
     public class BlogController : ControllerBase
     {

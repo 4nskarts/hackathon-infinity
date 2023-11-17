@@ -15,7 +15,7 @@ using static Kodikos.API.Controllers.EmployeeController;
 
 namespace Kodikos.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("infinity/[controller]")]
     [ApiController]
     public class EmployeeController : ControllerBase
     {
@@ -37,7 +37,7 @@ namespace Kodikos.API.Controllers
             return "Hi";
         }
 
-        [HttpPost("/register")]
+        [HttpPost("register")]
         public async Task<ActionResult<EmployeeReadDto>> Register([FromBody] EmployeeRegisterDto registerEmployee)
         {
 
@@ -53,7 +53,7 @@ namespace Kodikos.API.Controllers
             return Ok(employee.ToReadDto());
         }
 
-        [HttpPost("/login")]
+        [HttpPost("login")]
 
         public async Task<ActionResult<EmployeeReadDto>> Login([FromBody] EmployeeLoginDto loginEmployee)
         {
