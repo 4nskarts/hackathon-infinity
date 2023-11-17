@@ -2,7 +2,7 @@ import PrimaryButton from "../../../components/PrimaryButton";
 import SecondaryButton from "../../../components/SecondaryButton";
 import shape from '../styles/assets/Group 1.svg'
 import shape2 from '../styles/assets/Vector 1.svg'
-import shape3 from '../styles/assets/Staffing_Company_in_Albany__OR-removebg-preview 1.svg'
+import shape3 from '../styles/assets/Ppl2.svg'
 function Hero() {
   return (
     <section className="h-[130vh] pt-16 flex flex-col md:flex-row px-12 justify-around items-center font-Quicksand">
