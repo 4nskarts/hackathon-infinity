@@ -24,9 +24,9 @@ namespace Kodikos.API.Repositories.Implimentations
             return await this.dbContext.Employees.Where(e => e.Email == email).FirstOrDefaultAsync();
         }
 
-        public Task<IEnumerable<Employee>> GetEmployees()
+        public async Task<IEnumerable<Employee>> GetEmployees(int companyId)
         {
-            throw new NotImplementedException();
+            return await this.dbContext.Employees.Where(e => e.CompanyId == companyId).ToListAsync();
         }
     }
 }

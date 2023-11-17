@@ -11,6 +11,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<KodikosDbContext>();
 builder.Services.AddScoped< IEmployeeRepository , EmployeeRepository >();
 builder.Services.AddScoped< IBlogRepository     , BlogRepository     >();
+builder.Services.AddScoped< IIssueRepository    , IssueRepository    >();
 
 var app = builder.Build();
 
