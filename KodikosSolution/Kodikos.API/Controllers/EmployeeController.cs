@@ -12,6 +12,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Security.Cryptography;
 using static Kodikos.API.Controllers.EmployeeController;
+using Kodikos.API.Entities;
 
 namespace Kodikos.API.Controllers
 {

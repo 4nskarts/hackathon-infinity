@@ -43,7 +43,9 @@ namespace Kodikos.API.Controllers
                 return BadRequest("Can not found the issue writer");
             }
 
-            return Ok(issue.ToDto(employee));
+            var issueReadDto = issue.ToDto(employee);
+
+            return Ok(issueReadDto);
         }
 
         [HttpGet("{issueId}/blogs")]
