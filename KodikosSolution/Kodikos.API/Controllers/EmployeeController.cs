@@ -2,6 +2,7 @@
 using Kodikos.API.Extentions;
 using Kodikos.API.Repositories.Interfaces;
 using Kodikos.Models.Dtos.Employee;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Identity.Client;
@@ -9,6 +10,8 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using System.Security.Cryptography;
+using static Kodikos.API.Controllers.EmployeeController;
 
 namespace Kodikos.API.Controllers
 {
@@ -22,12 +25,24 @@ namespace Kodikos.API.Controllers
         {
             this.configuration = configuration;
             this.employeeRepository = employeeRepository;
+            this.passwordHashService = new PasswordHashService(configuration.GetSection("Jwt:Key").Value!);
+        }
+
+        PasswordHashService passwordHashService { get; set; }
+
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        public ActionResult<string> Test()
+        {
+            return "Hi";
         }
 
         [HttpPost("/register")]
-
         public async Task<ActionResult<EmployeeReadDto>> Register([FromBody] EmployeeRegisterDto registerEmployee)
         {
+
+            registerEmployee.Password = passwordHashService.HashPassword(registerEmployee.Password);
+
             Employee? employee = await this.employeeRepository.AddEmployee( registerEmployee.ToEntity() );
 
             if(employee == null )
@@ -49,44 +64,97 @@ namespace Kodikos.API.Controllers
                 return NotFound("User Not Found");
             }
 
-            if(loginEmployee.Password != employee.HashedPassword)
+            if(!passwordHashService.VerifyPassword(employee, loginEmployee.Password))
             {
                 return BadRequest("Wrong Password");
             }
 
-            string token = CreateToken(employee);
+            string token = GenerateJwtToken(employee);
 
             return Ok ( token );
         }
 
-        private string CreateToken(Employee employee)
+        private string GenerateJwtToken(Employee employee)
         {
-            List<Claim> claims = new List<Claim>
+            try
             {
+                var claims1 = new List<Claim>
+                {
+                    new Claim(ClaimTypes.NameIdentifier, employee.EmployeeId.ToString()),
+                    new Claim(ClaimTypes.Name, $"{employee.FirstName} {employee.LastName}"),
+                    new Claim(ClaimTypes.Role, employee.IsAdmin.GetValueOrDefault() ? "Admin" : "User"),
+                    // You can add more claims as needed
+                };
 
-                new Claim("firstName",employee.FirstName),
-                new Claim("lastName",employee.LastName),
-                new Claim("email",employee.Email),
-                new Claim("phone",employee.Phone),
-                new Claim("companyId",employee.CompanyId.GetValueOrDefault().ToString()),
-                new Claim("IsAdmin",employee.IsAdmin.ToString()),
+                var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Key"]));
+                var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
-            };
-
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(this.configuration.GetSection("AppSettings:Token").Value!) );
-        
-            var creds = new SigningCredentials(key,SecurityAlgorithms.HmacSha512Signature);
-
-            var token = new JwtSecurityToken(
-                    claims: claims,
-                    expires: DateTime.Now.AddDays(1),
+                var token = new JwtSecurityToken(
+                    issuer: configuration["Jwt:Issuer"],
+                    audience: configuration["Jwt:Audience"],
+                    claims: claims1,
+                    expires: DateTime.Now.AddMinutes(30), // Token expiration time
                     signingCredentials: creds
-
                 );
 
-            var jwt = new JwtSecurityTokenHandler().WriteToken(token);
-            return jwt;
 
+                return new JwtSecurityTokenHandler().WriteToken(token);
+            }
+            catch (Exception ex)
+            {
+                // Log or print the exception for debugging
+                Console.WriteLine($"Error generating JWT token: {ex.Message}");
+                throw;
+            }
+        }
+
+
+        public class PasswordHashService
+        {
+            private readonly string _secretKey;
+
+            public PasswordHashService(string secretKey)
+            {
+                this._secretKey = secretKey;
+            }
+
+            public string HashPassword(string password)
+            {
+                // Convert the secret key to a byte array
+                byte[] keyBytes = Convert.FromBase64String(_secretKey);
+
+                // Convert the password to a byte array
+                byte[] passwordBytes = System.Text.Encoding.UTF8.GetBytes(password);
+
+                // Use HMAC-SHA256 to compute the hash
+                using (var hmac = new HMACSHA256(keyBytes))
+                {
+                    byte[] hashedBytes = hmac.ComputeHash(passwordBytes);
+                    string hashedPassword = Convert.ToBase64String(hashedBytes);
+                    return hashedPassword;
+                }
+            }
+
+            public bool VerifyPassword(Employee employee, string password)
+            {
+                // Decode the stored hash from Base64
+                byte[] storedHashBytes = Convert.FromBase64String(employee.HashedPassword);
+
+                // Compute the hash for the entered password
+                string enteredPasswordHash = HashPassword(password);
+                byte[] enteredHashBytes = Convert.FromBase64String(enteredPasswordHash);
+
+                // Compare the computed hash with the stored hash
+                for (int i = 0; i < storedHashBytes.Length; i++)
+                {
+                    if (storedHashBytes[i] != enteredHashBytes[i])
+                    {
+                        return false;
+                    }
+                }
+
+                return true;
+            }
         }
     }
 
