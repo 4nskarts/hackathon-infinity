@@ -27,6 +27,16 @@ const solutions = [
 ];
 
 const BlogPage = ({ issues }) => {
+  const [isSidebarOpen, setSidebarOpen] = useState(false);
+
+  const toggleSidebar = () => {
+    setSidebarOpen(!isSidebarOpen);
+  };
+
+  const closeSidebar = () => {
+    setSidebarOpen(false);
+  };
+
   const { id } = useParams();
   const issue = issues.find((issue) => issue.id === id);
 
