@@ -17,5 +17,20 @@ namespace Kodikos.API.Extentions
             };
         }
 
+        public static IEnumerable<BlogReadDto> ToDto(this IEnumerable<Blog> blogs, IEnumerable<Employee> employees)
+        {
+            return from b in blogs
+                   join e in employees
+                   on b.WriterId equals e.EmployeeId
+                   select new BlogReadDto()
+                   {
+                       BlogId = b.BlogId,
+                       WriterId = b.WriterId.GetValueOrDefault(),
+                       Body = b.Body,
+                       Writer = e.ToDto(),
+                   };
+        }
+
+
     }
 }

@@ -9,7 +9,7 @@ namespace Kodikos.API.Repositories.Interfaces
 
         Task<Employee?> GetEmployee(string email);
 
-        Task<IEnumerable<Employee>> GetEmployees();
+        Task<IEnumerable<Employee>> GetEmployees(int companyId);
 
     }
 }
