@@ -3,14 +3,16 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useRef } from "react";
 import "../styles/testimonial.css";
+import shape2 from '../styles/assets/Group 1(2).svg'
 
 const TestimonialItem = ({ text, author, imageUrl }) => (
-  <div className="text-center container-test flex flex-col items-center justify-center bg-transparent">
+  <div className="text-center container-test flex flex-col items-center justify-center bg-transparent relative">
     <img
       src={imageUrl}
       className="h-16 w-16 border-4 border-blue object-cover rounded-full my-3"
       alt="nope"
     />
+    <img src={shape2} className="absolute hidden md:block top-0 right-0 h-[14rem] z-0" />
     <div className="font-bold text-left">{author}</div>
     <div
       className="text-grey overflow-auto mx-2 align-left"

@@ -43,7 +43,7 @@ function Navbar() {
     }, [isSidebarOpen]);
 
     return (
-        <nav className="h-16 flex absolute flex-row items-center justify-between md:justify-around  bg-white w-full font-poppins  top-0 px-4">
+        <nav className="h-16 flex absolute flex-row items-center justify-between md:justify-around  bg-white w-full font-poppins  top-0 px-4 z-50">
             <div
                 className="md:hidden text-2xl font-bold items-center cursor-pointer align-middle ml-5"
                 onClick={toggleSidebar}

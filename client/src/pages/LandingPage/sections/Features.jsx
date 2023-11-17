@@ -1,6 +1,6 @@
 import React from "react";
 import ThirdButton from "../../../components/ThirdButton";
-
+import image from '../styles/assets/Frame 18.svg'
 function FeatureSection({ title, description, buttonText, reversed = false }) {
   const flexClass = reversed ? "md:flex-row-reverse" : "md:flex-row";
 
@@ -9,11 +9,9 @@ function FeatureSection({ title, description, buttonText, reversed = false }) {
       className={`w-full flex justify-between items-center  ${flexClass}`}
     >
       {/* Left Section */}
-      <div className="w-0 md:w-1/2 h-screen bg-black flex justify-center items-center">
-        <div className="hidden md:block w-[320px] h-[394px] rounded bg-white text-transparent">
-          qsmkjdqsjdk
-        </div>
-      </div>
+
+        <img src={image} className="w-1/2"/>
+      
 
       {/* Right Section */}
       <div className="flex max-w-lg m-auto flex-col items-center justify-start">
