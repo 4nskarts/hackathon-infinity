@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import PrimaryButton from "./PrimaryButton";
+import SecondaryButton from "./SecondaryButton";
 
 function Navbar() {
     const [isSidebarOpen, setSidebarOpen] = useState(false);
@@ -32,39 +34,24 @@ function Navbar() {
     }, [isSidebarOpen]);
 
     return (
-        <nav className="flex flex-row font-Quicksand justify-between md:justify-around items-center bg-transparent w-full p-4 font-poppins">
+        <nav className="h-16 flex flex-row font-Quicksand items-center justify-between md:justify-around bg-white w-full font-poppins absolute top-0">
             <div
                 className="md:hidden text-xl cursor-pointer font-medium ml-5"
                 onClick={toggleSidebar}
             >
                 ☰
             </div>
-            <section className="flex items-center">
-                <div className="pl-2 flex flex-col">
-                    <div className="text-[13px] sm:text-md cursor-pointer md:text-[17px] font-bold">
-                        Google Developer Student Club
-                    </div>
-                    <div className="text-[11px] sm:text-[14px] cursor-pointer font-semibold">
-                        ESI Sidi Bel Abbes
-                    </div>
-                </div>
+            <div className="text-[13px] sm:text-md cursor-pointer md:text-[17px] font-bold">
+                TRADE
+            </div>
+            <section className="flex w-80 flex-row justify-evenly items-center">
+                <a href="#">Services</a>
+                <a href="#">Pricing</a>
+                <a href="#">Company</a>
             </section>
-            <section className="hidden md:flex gap-7 items-center">
-                <a href="#" className="font-semibold text-sm lg:text-base">
-                    HOME
-                </a>
-                <a href="#" className="font-semibold text-sm lg:text-base">
-                    EVENTS
-                </a>
-                <a href="#" className="font-semibold text-sm lg:text-base">
-                    PARTNERS
-                </a>
-                <a href="#" className="font-semibold text-sm lg:text-base">
-                    CONTACT US
-                </a>
-                <a href="#" className="font-semibold text-sm lg:text-base">
-                    FAQ
-                </a>
+            <section className="flex flex-row justify-between items-center w-80">
+                <PrimaryButton text="Get Started" />
+                <SecondaryButton text="Login"/>
             </section>
             {isSidebarOpen && (
                 <div className="md:hidden fixed top-0 left-0 h-full w-50 bg-gray-800 text-white p-4 flex flex-col open">
