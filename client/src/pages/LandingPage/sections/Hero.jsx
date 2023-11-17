@@ -1,6 +1,6 @@
 import PrimaryButton from "../../../components/PrimaryButton";
 import SecondaryButton from "../../../components/SecondaryButton";
-
+import shape from '../styles/assets/Group 1(1).svg'
 function Hero() {
   return (
     <section className="h-screen pt-16 flex flex-col md:flex-row px-12 justify-around items-center">
@@ -22,6 +22,7 @@ function Hero() {
         </div>
       </div>
       <div className="hidden md:block bg-black rounded-lg w-full md:w-[457px] h-[457px]"></div>
+    <img src={shape} className="absolute top-24 left-0"/>
     </section>
   );
 }

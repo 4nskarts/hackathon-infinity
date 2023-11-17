@@ -6,18 +6,18 @@ import "../styles/testimonial.css";
 
 const TestimonialItem = ({ text, author, imageUrl }) => (
   <div className="text-center container-test flex flex-col items-center justify-center bg-transparent">
-    <div
-      className="text-grey overflow-auto mx-2"
-      style={{ maxHeight: "150px", width: "100%", overflowY: "auto" }}
-    >
-      {text}
-    </div>
     <img
       src={imageUrl}
-      className="h-16 w-16 border-2 border-black object-cover rounded-full my-3"
+      className="h-16 w-16 border-4 border-blue object-cover rounded-full my-3"
       alt="nope"
     />
-    <div className="font-bold text-primaryGreen">{author}</div>
+    <div className="font-bold text-left">{author}</div>
+    <div
+      className="text-grey overflow-auto mx-2 align-left"
+      style={{ maxHeight: "150px", width: "100%", overflowY: "auto" }}
+    >
+      '{text}'
+    </div>
   </div>
 );
 
