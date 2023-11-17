@@ -12,17 +12,17 @@ import Footer from "./sections/Footer";
 
 function LandingPage() {
     return (
-        <main className="flex flex-col gap-4 bg-[#D9D9D9] font-Quicksand">
-            <Navbar />
-            <Hero />
-            <SocialProof />
-            {/* <CallToAction /> */}
-            {/* <About /> */}
-            {/* <Features /> */}
-            {/* <Testimonial /> */}
-            {/* <Statistics /> */}
-            {/* <Footer /> */}
-        </main>
+      <main className="flex flex-col bg-[#D9D9D9] font-Quicksand">
+        <Navbar />
+        <Hero />
+        <CallToAction />
+        <About />
+        <Features />
+        <Testimonial />
+        <SocialProof />
+        <Statistics />
+        <Footer />
+      </main>
     );
 }
 

@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import PrimaryButton from "./PrimaryButton";
 import ThirdButton from "./ThirdButton";
+import { NavLink } from "react-router-dom";
 // SearchBar.js
 
 const SearchBar = () => {
@@ -13,9 +14,9 @@ const SearchBar = () => {
         className="border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-full text-sm focus:outline-none"
         placeholder="Search for issues or blogs"
       />
-      <button className="absolute right-3 top-2 focus:outline-none">
+      <button className="absolute right-3 text-xl text-center items-center top-1.5 focus:outline-none">
         {/* You can use an icon here, like a search icon */}
-        Search
+        {">"}
       </button>
     </div>
   );
@@ -73,7 +74,13 @@ function NavbarHome() {
             {/* Add search bar component here if needed */}
             <div className="flex flex-col mb-2 justify-between">
               <ThirdButton text="Logout" />
-              <ThirdButton text="Profile" />
+              <NavLink
+                to={"/profile"}
+                className="py-2.5 px-10 rounded-lg text-sm bg-white text-black
+                border-solid border-2 border-black"
+              >
+                Profile
+              </NavLink>
             </div>
           </div>
           <div className="pointer-events-none z-40 fixed top-0 left-[240px] bottom-0 right-0 bg-[rgba(0,0,0,0.6)] "></div>
@@ -84,7 +91,7 @@ function NavbarHome() {
           <div className="flex flex-row items-center space-x-4">
             <ThirdButton text="Logout" />
             <ThirdButton text="Profile" />
-            <PrimaryButton text="Create" />
+            {/* <PrimaryButton text="Create" /> */}
           </div>
         </section>
       )}
