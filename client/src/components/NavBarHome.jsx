@@ -13,9 +13,9 @@ const SearchBar = () => {
         className="border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-full text-sm focus:outline-none"
         placeholder="Search for issues or blogs"
       />
-      <button className="absolute right-3 top-2 focus:outline-none">
+      <button className="absolute right-3 text-xl text-center items-center top-1.5 focus:outline-none">
         {/* You can use an icon here, like a search icon */}
-        Search
+        {">"}
       </button>
     </div>
   );
@@ -84,7 +84,7 @@ function NavbarHome() {
           <div className="flex flex-row items-center space-x-4">
             <ThirdButton text="Logout" />
             <ThirdButton text="Profile" />
-            <PrimaryButton text="Create" />
+            {/* <PrimaryButton text="Create" /> */}
           </div>
         </section>
       )}

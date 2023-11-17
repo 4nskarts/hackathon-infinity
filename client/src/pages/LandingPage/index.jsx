@@ -12,6 +12,7 @@ import Footer from "./sections/Footer";
 
 function LandingPage() {
     return (
+<<<<<<< HEAD
         <main className="flex flex-col bg-[#D9D9D9] font-Quicksand">
             <Navbar />
             <Hero />
@@ -23,6 +24,19 @@ function LandingPage() {
             <Statistics />
             <Footer />
         </main>
+=======
+      <main className="flex flex-col bg-[#D9D9D9] font-Quicksand">
+        <Navbar />
+        <Hero />
+        <CallToAction />
+        <About />
+        <Features />
+        <Testimonial />
+        <SocialProof />
+        <Statistics />
+        <Footer />
+      </main>
+>>>>>>> 735bfd473ee05e3ea2c07c50e530687d98ac084a
     );
 }
 
