@@ -1,11 +1,49 @@
-// Card.js
-
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import NavbarHome from "../../components/NavBarHome";
 import "./Card.css";
 import { Link } from "react-router-dom";
+import { url } from "../../helpers/url";
+import { getUser } from "../../helpers/auth";
 
-const Home = ({ users, issues }) => {
+const Home = () => {
+  const [issues, setIssues] = useState([]);
+
+  useEffect(() => {
+    // Fetch issues data
+    fetchIssues();
+  }, []);
+
+  const fetchIssues = async () => {
+    try {
+      const user = getUser();
+      const companyId = user.companyId; // Replace with the desired company ID
+      const endpoint = `${url}/infinity/Issue/company/${companyId}`;
+      // const endpoint = `https://23fd-154-121-43-118.ngrok-free.app/infinity/Issue/1/blogs`;
+      const response = await fetch(endpoint, {
+        method: "get",
+        headers: new Headers({
+          "ngrok-skip-browser-warning": "69420",
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      console.log(response);
+      // console.log(response.json());
+
+      const data = await response.json();
+      console.log(data[0]);
+      console.log(data[0].writer);
+      setIssues(data);
+    } catch (error) {
+      console.error("Error fetching issues:", error);
+    }
+  };
+
+  const tags = ["#tech", "#finance", "#FGI"];
+
   const formatDate = (date) => {
     return new Date(date).toLocaleString();
   };
@@ -28,7 +66,7 @@ const Home = ({ users, issues }) => {
 
   return (
     <>
-      {isModalOpen ? (
+      {isModalOpen && (
         <div>
           <div className="w-screen h-screen bg-black opacity-70 items-center fixed inset-0 "></div>
           <div className="bg-[#edede9] absolute -translate-x-1/2 rounded-md -translate-y-1/2 leading-[1.4] max-w-[800px] min-w-[500px] px-7 py-3.5 left-2/4 top-[50%]">
@@ -83,60 +121,61 @@ const Home = ({ users, issues }) => {
             </button>
           </div>
         </div>
-      ) : null}
-
-      <div className="mt-16">
+      )}
+      <>
         <NavbarHome />
-        <div className="grid grid-cols-1 md:grid-cols-2 bg-gray-200 lg:grid-cols-4 gap-0 p-8">
-          {issues.map((issue, index) => (
-            <div
-              key={index}
-              className="max-w-sm mx-2 my-8 bg-white shadow-lg rounded-lg overflow-hidden"
-            >
-              <div className="flex justify-center items-center px-6 py-4">
-                <div className="flex justify-center items-center">
-                  <img
-                    src={users[index].profilePicture}
-                    alt="User Profile"
-                    className=" rounded-full mt-0 mr-4"
-                  ></img>
-                </div>
-                <div>
-                  <div className="text-xl font-semibold text-gray-800">
-                    {users[index].name}
+        <div className="mt-16">
+          <div className="flex-col h-full md:h-screen items-center flex md:grid grid-cols-1 md:grid-cols-2 bg-gray-200 lg:grid-cols-4 gap-0 p-8">
+            {issues &&
+              issues.map((issue, index) => (
+                <div
+                  key={index}
+                  className="max-w-sm mx-2 my-8 bg-white shadow-lg rounded-lg"
+                >
+                  <div className="flex justify-center items-center px-6 py-4">
+                    <div className="flex justify-center items-center">
+                      <img
+                        src="https://i.pinimg.com/originals/98/1d/6b/981d6b2e0ccb5e968a0618c8d47671da.jpg"
+                        alt="User Profile"
+                        className=" rounded-full mt-0 mr-4"
+                      ></img>
+                    </div>
+                    <div>
+                      <div className="text-xl font-semibold text-gray-800">
+                        {issue.writer.firstName + " " + issue.writer.lastName}
+                      </div>
+                      <p className="text-gray-600 text-sm">
+                        {formatDate(issue.publishTime)}
+                      </p>
+                    </div>
                   </div>
-                  <p className="text-gray-600 text-sm">
-                    {formatDate(issue.postedTime)}
-                  </p>
+                  <hr className="border-t" />
+                  <div className="px-6 py-4">
+                    <h2 className="font-bold text-xl mb-2">{issue.title}</h2>
+                    <p className="text-gray-700 text-base mb-4 overflow-hidden overflow-ellipsis h-16 line-clamp-4">
+                      {issue.body}
+                    </p>
+                    <div className="mb-4 flex justify-end">
+                      {tags.map((tag, tagIndex) => (
+                        <span
+                          key={tagIndex}
+                          className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                    <Link to={"/blog"}>
+                      <button className="bg-[#FFD500] text-black py-1 px-4 mt-4 rounded-lg">
+                        Answer
+                      </button>
+                    </Link>
+                  </div>
                 </div>
-              </div>
-              <hr className="border-t" />
-              <div className="px-6 py-4">
-                <h2 className="font-bold text-xl mb-2">{issue.title}</h2>
-                <p className="text-gray-700 text-base mb-4 overflow-hidden overflow-ellipsis h-16 line-clamp-4">
-                  {issue.description}
-                </p>
-                <div className="mb-4 flex justify-end">
-                  {issue.tags.map((tag, tagIndex) => (
-                    <span
-                      key={tagIndex}
-                      className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-                <Link to={"/blog"}>
-                  <button className="bg-[#FFD500] text-black py-1 px-4 mt-4 rounded-lg">
-                    Answer
-                  </button>
-                </Link>
-              </div>
-            </div>
-          ))}
+              ))}
+          </div>
         </div>
-      </div>
-
+      </>
       {/* Button to open the modal */}
       <button
         className="fixed bottom-8 right-8 bg-[#FFD500] text-black py-2 px-4 text-4xl rounded-full"

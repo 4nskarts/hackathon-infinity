@@ -15,14 +15,14 @@ import "./ProfileCard.css";
 
 function ProfilePage() {
   return (
-    <div className="bg-gray-200 flex justify-center items-center h-screen">
+    <div className="bg-gray-200 flex flex-col gap-10 justify-center items-center h-screen">
       <div className="card-container">
         <header className="h-fit">
           <h1 className="mt-5 text-2xl font-semibold">Profile</h1>
           <img
-            src="https://i.pinimg.com/originals/e2/0e/21/e20e213b87477983af18cb325aad26af.jpg"
+            src="https://i.pinimg.com/originals/b8/77/85/b8778585aab18dca3f09ad853b5bff2b.jpg"
             alt={user.lastName}
-            className="border-2 border-black rounded-sm"
+            className="border-2 border-black rounded-lg"
           />
         </header>
         <h1 className="bold-text">
@@ -47,6 +47,11 @@ function ProfilePage() {
           </div>
         </div>
       </div>
+      {user.isAdmin && (
+        <p className="font-semibold hover:text-blue hover:cursor-pointer">
+          Manage Employees
+        </p>
+      )}
     </div>
   );
 }
