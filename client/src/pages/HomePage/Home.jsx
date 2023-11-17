@@ -1,19 +1,90 @@
 // Card.js
 
-import React from "react";
+import React, { useState } from "react";
 import NavbarHome from "../../components/NavBarHome";
+import Modal from "react-modal";
 import "./Card.css";
 
 const Home = ({ users, issues }) => {
   const formatDate = (date) => {
-    // Implement your own date formatting logic here
-    // This is just a basic example
     return new Date(date).toLocaleString();
   };
-  console.log(issues);
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleCreateIssue = () => {
+    // Add logic to handle creating a new issue
+    // This is where you might make an API call to create a new issue
+    closeModal();
+  };
 
   return (
     <div className="min-h-screen mt-16">
+      {isModalOpen ? (
+        <div>
+          <div className="w-screen h-screen bg-black opacity-70 items-center fixed inset-0 "></div>
+          <div className="bg-[#edede9] absolute -translate-x-1/2 rounded-md -translate-y-1/2 leading-[1.4] max-w-[800px] min-w-[500px] px-7 py-3.5 left-2/4 top-[50%]">
+            <h2 className="font-semibold text-xl">✕ Raise a New Issue ✕</h2>
+            <form className="mt-6 gap-8" onSubmit={handleCreateIssue}>
+              <div className="flex flex-col gap-1 mt-4 mb-2">
+                <label>Title</label>
+                <input
+                  id="title"
+                  name="title"
+                  type="text"
+                  autoComplete="off"
+                  required
+                  className="block w-full px-2 rounded-md border-1 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-yellow-700 bg-gray-200 sm:text-sm sm:leading-6"
+                />
+              </div>
+              <div className="flex flex-col gap-1 mt-4 mb-2">
+                <label>Description</label>
+                <textarea
+                  id="description"
+                  name="description"
+                  rows="4"
+                  required
+                  className="block w-full px-2 rounded-md border-1 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-yellow-700 bg-gray-200 sm:text-sm sm:leading-6"
+                ></textarea>
+              </div>
+              <div className="flex flex-col gap-2 mt-4 mb-4">
+                <label>Tags</label>
+                <input
+                  id="tags"
+                  name="tags"
+                  type="text"
+                  autoComplete="off"
+                  placeholder="Enter tags separated by commas"
+                  className="block w-full px-2 rounded-md border-1 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-yellow-700 bg-gray-200 sm:text-sm sm:leading-6"
+                />
+              </div>
+              <div className="flex gap-4 justify-center mt-4 items-center">
+                <button
+                  type="submit"
+                  className="shrink-0 align-middle bg-[#FFD500] text-black rounded-lg p-2"
+                >
+                  Create Issue
+                </button>
+              </div>
+            </form>
+            <button
+              className="text-red-800 border-2 font-semibold text-lg absolute right-4 top-2"
+              onClick={closeModal}
+            >
+              x
+            </button>
+          </div>
+        </div>
+      ) : null}
+
       <NavbarHome />
       <div className="grid grid-cols-1 md:grid-cols-2 bg-gray-200 lg:grid-cols-4 gap-0 p-8">
         {issues.map((issue, index) => (
@@ -59,6 +130,14 @@ const Home = ({ users, issues }) => {
           </div>
         ))}
       </div>
+
+      {/* Button to open the modal */}
+      <button
+        className="fixed bottom-8 right-8 bg-[#FFD500] text-black py-2 px-4 text-4xl rounded-full"
+        onClick={openModal}
+      >
+        +
+      </button>
     </div>
   );
 };

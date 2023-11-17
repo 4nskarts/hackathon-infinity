@@ -84,7 +84,7 @@ function NavbarHome() {
           <div className="flex flex-row items-center space-x-4">
             <ThirdButton text="Logout" />
             <ThirdButton text="Profile" />
-            <PrimaryButton text="Create" />
+            {/* <PrimaryButton text="Create" /> */}
           </div>
         </section>
       )}
