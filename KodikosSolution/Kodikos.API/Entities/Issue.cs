@@ -27,6 +27,9 @@ public partial class Issue
     [InverseProperty("Issue")]
     public virtual ICollection<Blog> Blogs { get; set; } = new List<Blog>();
 
+    [InverseProperty("Issue")]
+    public virtual ICollection<IssuesHasTag> IssuesHasTags { get; set; } = new List<IssuesHasTag>();
+
     [ForeignKey("WriterId")]
     [InverseProperty("Issues")]
     public virtual Employee? Writer { get; set; }

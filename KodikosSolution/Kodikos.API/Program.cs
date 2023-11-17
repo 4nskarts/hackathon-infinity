@@ -4,8 +4,12 @@ using Kodikos.API.Repositories.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
+using System.Linq.Expressions;
+
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
 var builder = WebApplication.CreateBuilder(args);
+
 
 builder.Services.AddControllers();
 
@@ -16,6 +20,7 @@ builder.Services.AddDbContext<KodikosDbContext>();
 builder.Services.AddScoped< IEmployeeRepository , EmployeeRepository >();
 builder.Services.AddScoped< IBlogRepository     , BlogRepository     >();
 builder.Services.AddScoped< IIssueRepository    , IssueRepository    >();
+builder.Services.AddScoped< ICompanyRepository  , CompanyRepository  >();
 
 builder.Services.AddSwaggerGen(c=>
 {
@@ -55,6 +60,9 @@ builder.Services.Configure<SwaggerGeneratorOptions>(options =>
 builder.Services.AddAuthorization();
 builder.Services.AddAuthentication("Bearer").AddJwtBearer();
 
+builder.Services.AddCors(p=>p.AddPolicy("corspolicy",build=>
+    build.SetIsOriginAllowed(origin => true).AllowAnyMethod().AllowAnyHeader()
+));
 
 var app = builder.Build();
 
@@ -62,9 +70,12 @@ var app = builder.Build();
 app.UseSwagger();
 app.UseSwaggerUI();
 
+app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
 
 app.UseHttpsRedirection();
+
+app.UseCors(MyAllowSpecificOrigins);
 
 app.UseAuthorization();
 
