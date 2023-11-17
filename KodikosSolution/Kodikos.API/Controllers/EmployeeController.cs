@@ -21,20 +21,30 @@ namespace Kodikos.API.Controllers
     {
         private readonly IConfiguration configuration;
         private readonly IEmployeeRepository employeeRepository;
-        public EmployeeController(IConfiguration configuration,IEmployeeRepository employeeRepository)
+        private readonly ICompanyRepository companyRepository;
+        public EmployeeController(IConfiguration configuration, IEmployeeRepository employeeRepository, ICompanyRepository companyRepository)
         {
             this.configuration = configuration;
             this.employeeRepository = employeeRepository;
             this.passwordHashService = new PasswordHashService(configuration.GetSection("Jwt:Key").Value!);
+            this.companyRepository = companyRepository;
         }
 
         PasswordHashService passwordHashService { get; set; }
 
-        [HttpGet]
-        [Authorize(Roles = "Admin")]
-        public ActionResult<string> Test()
+        [HttpGet("{companyeeId}")]
+        public async Task<ActionResult<IEnumerable<EmployeeReadDto>>> GetAllEmployees(int companyeeId)
         {
-            return Ok("Every thing is ok");
+
+            Company? company = await companyRepository.GetCompany(companyeeId);
+
+            if(company == null)
+            {
+                return BadRequest("Company Does not exist");
+            }
+
+            return Ok (await this.employeeRepository.GetEmployees(companyeeId));
+
         }
 
         [HttpPost("register")]
@@ -71,7 +81,7 @@ namespace Kodikos.API.Controllers
 
             string token = GenerateJwtToken(employee);// Token -> Cancel auth
 
-            return Ok (employee);
+            return Ok (employee.ToReadDto());
         }
 
         private string GenerateJwtToken(Employee employee)
@@ -155,3 +165,5 @@ namespace Kodikos.API.Controllers
     }
 
 }
+
+
