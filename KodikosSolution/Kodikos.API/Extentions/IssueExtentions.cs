@@ -19,5 +19,26 @@ namespace Kodikos.API.Extentions
             };
         }
 
+        public static Issue toEntity(this IssueCreateDto issue)
+        {
+            return new Issue()
+            {
+                WriterId = issue.WriterId,
+                Body = issue.Body,
+                Title = issue.Title,
+                PublishTime = DateTime.Now,
+            };
+        }
+
+        public static Issue toEntity(this IssueUpdateDto issue)
+        {
+            return new Issue()
+            {
+                IssueId = issue.IssueId,
+                Body = issue.Body,
+                Title = issue.Title,
+            };
+        }
+
     }
 }

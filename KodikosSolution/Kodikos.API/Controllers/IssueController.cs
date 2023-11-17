@@ -80,5 +80,30 @@ namespace Kodikos.API.Controllers
             return Ok(blogsReadDto);
         }
 
+        [HttpPost]
+        public async Task<ActionResult<IssueReadDto>> AddIssue([FromBody] IssueCreateDto issueCreateDto)
+        {
+            Issue? issue = (await issueRepository.AddIssue(issueCreateDto.toEntity()));
+
+            if(issue == null) { return BadRequest("This Should not happen"); }
+
+            Employee? employee = await this.employeeRepository.GetEmployee(issue.WriterId.GetValueOrDefault());
+
+
+            return issue.toDto(employee);
+        }
+
+        [HttpPut]
+        public async Task<ActionResult<IssueReadDto>> UpdateIssue([FromBody] IssueUpdateDto issueCreateDto)
+        {
+            Issue? issue = (await issueRepository.UpdateIssue(issueCreateDto.toEntity()));
+
+            if (issue == null) { return BadRequest("This Should not happen"); }
+
+            Employee? employee = await this.employeeRepository.GetEmployee(issue.WriterId.GetValueOrDefault());
+
+            return issue.toDto(employee);
+        }
+
     }
 }
