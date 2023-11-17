@@ -11,7 +11,7 @@ import ProfilePage from "./pages/ProfilePage/ProfilePage";
 
 const users = Array.from({ length: 10 }, (_, index) => ({
   name: `dolor voluptate eius ${index + 1}`,
-  profilePicture: `https://i.pinimg.com/originals/cf/d0/e6/cfd0e65ab7aafae09ad428810da84609.jpg`,
+  profilePicture: `https://i.pinimg.com/originals/ca/ee/1b/caee1b81073f470a00c9b79c5f0b17cb.jpg`,
 }));
 
 // Example data for 10 issues

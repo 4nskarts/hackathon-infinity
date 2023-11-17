@@ -74,9 +74,12 @@ function NavbarHome() {
             {/* Add search bar component here if needed */}
             <div className="flex flex-col mb-2 justify-between">
               <ThirdButton text="Logout" />
-              <NavLink to="/profile">
+              <NavLink
+                to={"/profile"}
                 className="py-2.5 px-10 rounded-lg text-sm bg-white text-black
-                border-solid border-2 border-black" Profile
+                border-solid border-2 border-black"
+              >
+                Profile
               </NavLink>
             </div>
           </div>

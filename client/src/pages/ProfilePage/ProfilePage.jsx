@@ -20,8 +20,9 @@ function ProfilePage() {
         <header className="h-fit">
           <h1 className="mt-5 text-2xl font-semibold">Profile</h1>
           <img
-            src="https://i.pinimg.com/564x/b1/48/73/b14873640078e7a2a5689cdd979dc623.jpg"
+            src="https://i.pinimg.com/originals/e2/0e/21/e20e213b87477983af18cb325aad26af.jpg"
             alt={user.lastName}
+            className="border-2 border-black rounded-sm"
           />
         </header>
         <h1 className="bold-text">
