@@ -56,5 +56,10 @@ namespace Kodikos.API.Repositories.Implimentations
             await this.dbContext.SaveChangesAsync();
             return true;
         }
+
+        public async Task<IEnumerable<Issue>> ReadAllIssues()
+        {
+            return await this.dbContext.Issues.ToListAsync();
+        }
     }
 }

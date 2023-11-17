@@ -40,5 +40,17 @@ namespace Kodikos.API.Extentions
             };
         }
 
+        public static IEnumerable<IssueReadDto> ToDto(this IEnumerable<Issue> issues,IEnumerable<Employee> employees)
+        {
+            return from i in issues join e in employees on i.WriterId equals e.EmployeeId select new IssueReadDto()
+            {
+                WriterId = i.WriterId,
+                Writer = e.ToReadDto(),
+                Body = i.Body!,
+                IssueId = i.IssueId,
+                PublishTime = i.PublishTime.GetValueOrDefault(),
+                Title = i.Title,
+            };
+        } 
     }
 }

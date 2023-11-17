@@ -29,6 +29,6 @@ namespace Kodikos.Models.Dtos.Employee
 
         public bool? IsAdmin { get; set; }
 
-
+        
     }
 }

@@ -113,12 +113,79 @@ namespace Kodikos.API.Controllers
         {
             await this.blogRepository.DeleteBlogsOfIssue(issueId);
 
-            if(await this.issueRepository.DeleteIssue(issueId))
+            if (await this.issueRepository.DeleteIssue(issueId))
             {
                 return Ok("Deleted Successfuly");
             }
 
             return BadRequest("Something goes wrong");
+        }
+
+        [HttpGet]
+
+        public async Task<ActionResult<IEnumerable<Issue>>> GetAllIssues()
+        {
+            return Ok (await this.issueRepository.ReadAllIssues() );
+        }
+
+        [HttpGet("{companyId}/{pattern}")]
+        public async Task<ActionResult<IEnumerable<IssueReadDto>>> SearchPatternInIssues(int companyId,string pattern)
+        {
+            IEnumerable<Issue> issues =  await this.issueRepository.ReadAllIssues();
+            IEnumerable<string> pattern_words = pattern.Split(' ');
+            Dictionary<Issue, int> issuesPriority = new Dictionary<Issue, int>(); 
+
+            foreach(Issue issue in issues)
+            {
+                IEnumerable<string> issue_words = issue.Title.Split(' ');
+                IEnumerable<string> body_words  = issue.Body!.Split(' ');
+
+                foreach (string pattern_word in pattern_words)
+                {
+                    foreach (string body_word in body_words)
+                    {
+                        if (body_word.IndexOf(pattern_word) != -1)
+                        {
+                            if (issuesPriority.ContainsKey(issue))
+                            {
+                                issuesPriority[issue]++;
+                            }
+                            else
+                            {
+                                issuesPriority.Add(issue,0);
+
+                            }
+                        }
+                    }
+
+                    foreach (string title_word in body_words)
+                    {
+                        if (title_word.IndexOf(pattern_word) != -1)
+                        {
+                            if (issuesPriority.ContainsKey(issue))
+                            {
+                                issuesPriority[issue]++;
+                            }
+                            else
+                            {
+                                issuesPriority.Add(issue, 0);
+
+                            }
+                        }
+                    }
+                }
+            }
+
+            var OrdredIssueList = issuesPriority.OrderByDescending(e=>e.Value).ToList();
+
+            List<Issue> OrdredIssues = new List<Issue>();
+
+            foreach (var i in OrdredIssueList)
+            {
+                OrdredIssues.Add(i.Key);
+            }
+
+            return Ok( OrdredIssues.ToDto(await employeeRepository.GetEmployees(companyId)) );
         }
     }
 }

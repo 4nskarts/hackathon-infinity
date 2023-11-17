@@ -32,9 +32,9 @@ namespace Kodikos.API.Controllers
 
         [HttpGet]
         [Authorize(Roles = "Admin")]
-        private ActionResult<string> Test()
+        public ActionResult<string> Test()
         {
-            return "Hi";
+            return Ok("Every thing is ok");
         }
 
         [HttpPost("register")]
@@ -69,9 +69,9 @@ namespace Kodikos.API.Controllers
                 return BadRequest("Wrong Password");
             }
 
-            string token = GenerateJwtToken(employee);
+            string token = GenerateJwtToken(employee);// Token -> Cancel auth
 
-            return Ok ( token );
+            return Ok (employee);
         }
 
         private string GenerateJwtToken(Employee employee)
@@ -108,16 +108,13 @@ namespace Kodikos.API.Controllers
             }
         }
 
-
         public class PasswordHashService
         {
             private readonly string _secretKey;
-
             public PasswordHashService(string secretKey)
             {
                 this._secretKey = secretKey;
             }
-
             public string HashPassword(string password)
             {
                 // Convert the secret key to a byte array
@@ -134,7 +131,6 @@ namespace Kodikos.API.Controllers
                     return hashedPassword;
                 }
             }
-
             public bool VerifyPassword(Employee employee, string password)
             {
                 // Decode the stored hash from Base64
