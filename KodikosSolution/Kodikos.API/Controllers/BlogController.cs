@@ -9,7 +9,7 @@ using System.Collections.Generic;
 
 namespace Kodikos.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("infinity/[controller]")]
     [ApiController]
     public class BlogController : ControllerBase
     {
@@ -25,9 +25,9 @@ namespace Kodikos.API.Controllers
         }
 
         [HttpGet("{blogId}")]
-        public async Task<ActionResult<BlogReadDto>> GetBlog(int blogId)
+        public async Task<ActionResult<BlogReadDto>> ReadBlog(int blogId)
         {
-            Blog? blog = await this.blogRepository.GetBlog(blogId);
+            Blog? blog = await this.blogRepository.ReadBlog(blogId);
 
             if (blog == null)
             {
@@ -44,7 +44,13 @@ namespace Kodikos.API.Controllers
             return Ok(blog.ToDto(employee));
         }
 
-        
+        [HttpPost]
+
+        public async Task<ActionResult<BlogReadDto>> CreatBlog([FromBody] BlogCreatDto blogCreatDto)
+        {
+            Employee? employee = await this.employeeRepository.GetEmployee(blogCreatDto.WriterId);
+            return (await this.blogRepository.CreatBlog(blogCreatDto.ToEntity())).ToDto(employee!);
+        }
 
     }
 }

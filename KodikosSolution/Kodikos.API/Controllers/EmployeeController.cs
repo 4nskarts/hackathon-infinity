@@ -12,32 +12,57 @@ using System.Security.Claims;
 using System.Text;
 using System.Security.Cryptography;
 using static Kodikos.API.Controllers.EmployeeController;
+using Kodikos.API.Entities;
 
 namespace Kodikos.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("infinity/[controller]")]
     [ApiController]
     public class EmployeeController : ControllerBase
     {
+
         private readonly IConfiguration configuration;
         private readonly IEmployeeRepository employeeRepository;
-        public EmployeeController(IConfiguration configuration,IEmployeeRepository employeeRepository)
+        private readonly ICompanyRepository companyRepository;
+        public EmployeeController(IConfiguration configuration, IEmployeeRepository employeeRepository, ICompanyRepository companyRepository)
         {
             this.configuration = configuration;
             this.employeeRepository = employeeRepository;
             this.passwordHashService = new PasswordHashService(configuration.GetSection("Jwt:Key").Value!);
+            this.companyRepository = companyRepository;
         }
 
         PasswordHashService passwordHashService { get; set; }
 
-        [HttpGet]
-        [Authorize(Roles = "Admin")]
-        public ActionResult<string> Test()
+        [HttpGet("all/{companyeeId}")]
+        public async Task<ActionResult<IEnumerable<EmployeeReadDto>>> GetAllEmployees(int companyeeId)
         {
-            return "Hi";
+
+            Company? company = await companyRepository.GetCompany(companyeeId);
+
+            if (company == null)
+            {
+                return BadRequest("Company Does not exist");
+            }
+
+            return Ok(await this.employeeRepository.GetEmployees(companyeeId));
+
         }
 
-        [HttpPost("/register")]
+        [HttpGet("{employeeId}")]
+        public async Task<ActionResult<EmployeeReadDto>> GetEmployee(int employeeId)
+        {
+            Employee? employee = await this.employeeRepository.GetEmployee(employeeId);
+
+            if(employee == null)
+            {
+                return NotFound("Employee Not Found");
+            }
+
+            return employee.ToReadDto();
+        }
+
+        [HttpPost("register")]
         public async Task<ActionResult<EmployeeReadDto>> Register([FromBody] EmployeeRegisterDto registerEmployee)
         {
 
@@ -53,9 +78,9 @@ namespace Kodikos.API.Controllers
             return Ok(employee.ToReadDto());
         }
 
-        [HttpPost("/login")]
+        [HttpPost("login")]
 
-        public async Task<ActionResult<EmployeeReadDto>> Login([FromBody] EmployeeLoginDto loginEmployee)
+        public async Task<ActionResult<Tuple<EmployeeReadDto,string>>> Login([FromBody] EmployeeLoginDto loginEmployee)
         {
             Employee? employee = await this.employeeRepository.GetEmployee(loginEmployee.Email);
             
@@ -69,9 +94,10 @@ namespace Kodikos.API.Controllers
                 return BadRequest("Wrong Password");
             }
 
-            string token = GenerateJwtToken(employee);
+            string token = GenerateJwtToken(employee);// Token -> Cancel auth
 
-            return Ok ( token );
+            //return Ok (new Tuple<EmployeeReadDto,string> ( employee.ToReadDto() ,(await this.companyRepository.GetCompany(employee.CompanyId.GetValueOrDefault())).Name));
+            return Ok(employee.ToReadDto());
         }
 
         private string GenerateJwtToken(Employee employee)
@@ -108,16 +134,13 @@ namespace Kodikos.API.Controllers
             }
         }
 
-
         public class PasswordHashService
         {
             private readonly string _secretKey;
-
             public PasswordHashService(string secretKey)
             {
                 this._secretKey = secretKey;
             }
-
             public string HashPassword(string password)
             {
                 // Convert the secret key to a byte array
@@ -134,7 +157,6 @@ namespace Kodikos.API.Controllers
                     return hashedPassword;
                 }
             }
-
             public bool VerifyPassword(Employee employee, string password)
             {
                 // Decode the stored hash from Base64
@@ -156,6 +178,9 @@ namespace Kodikos.API.Controllers
                 return true;
             }
         }
+    
     }
 
 }
+
+

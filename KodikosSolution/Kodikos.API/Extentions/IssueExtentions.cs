@@ -6,7 +6,7 @@ namespace Kodikos.API.Extentions
     public static class IssueExtentions
     {
 
-        public static IssueReadDto toDto(this Issue issue,Employee writer)
+        public static IssueReadDto ToDto(this Issue issue,Employee writer)
         {
             return new IssueReadDto()
             {
@@ -19,7 +19,7 @@ namespace Kodikos.API.Extentions
             };
         }
 
-        public static Issue toEntity(this IssueCreateDto issue)
+        public static Issue ToEntity(this IssueCreateDto issue)
         {
             return new Issue()
             {
@@ -30,7 +30,7 @@ namespace Kodikos.API.Extentions
             };
         }
 
-        public static Issue toEntity(this IssueUpdateDto issue)
+        public static Issue ToEntity(this IssueUpdateDto issue)
         {
             return new Issue()
             {
@@ -40,5 +40,17 @@ namespace Kodikos.API.Extentions
             };
         }
 
+        public static IEnumerable<IssueReadDto> ToDto(this IEnumerable<Issue> issues,IEnumerable<Employee> employees)
+        {
+            return from i in issues join e in employees on i.WriterId equals e.EmployeeId select new IssueReadDto()
+            {
+                WriterId = i.WriterId,
+                Writer = e.ToReadDto(),
+                Body = i.Body!,
+                IssueId = i.IssueId,
+                PublishTime = i.PublishTime.GetValueOrDefault(),
+                Title = i.Title,
+            };
+        } 
     }
 }

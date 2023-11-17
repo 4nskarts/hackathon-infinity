@@ -24,6 +24,10 @@ public partial class KodikosDbContext : DbContext
 
     public virtual DbSet<Issue> Issues { get; set; }
 
+    public virtual DbSet<IssuesHasTag> IssuesHasTags { get; set; }
+
+    public virtual DbSet<Tag> Tags { get; set; }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
         => optionsBuilder.UseSqlServer("Data Source = .; Initial Catalog = KodikosDB; User Id = sa; Password=sa123456; Trusted_Connection=true;Encrypt=false;");
@@ -56,6 +60,20 @@ public partial class KodikosDbContext : DbContext
             entity.HasKey(e => e.IssueId).HasName("PK__Issues__B29F2BB87894A423");
 
             entity.HasOne(d => d.Writer).WithMany(p => p.Issues).HasConstraintName("FK__Issues__Writer_I__3D5E1FD2");
+        });
+
+        modelBuilder.Entity<IssuesHasTag>(entity =>
+        {
+            entity.HasKey(e => e.IssueHasTagId).HasName("PK__IssuesHa__DD8F7261AB21298E");
+
+            entity.HasOne(d => d.Issue).WithMany(p => p.IssuesHasTags).HasConstraintName("FK__IssuesHas__Issue__4D94879B");
+
+            entity.HasOne(d => d.Tag).WithMany(p => p.IssuesHasTags).HasConstraintName("FK__IssuesHas__Tag_I__4E88ABD4");
+        });
+
+        modelBuilder.Entity<Tag>(entity =>
+        {
+            entity.HasKey(e => e.TagId).HasName("PK__Tags__D0AC5C13D56F9CB6");
         });
 
         OnModelCreatingPartial(modelBuilder);
