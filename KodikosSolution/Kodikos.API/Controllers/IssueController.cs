@@ -5,6 +5,7 @@ using Kodikos.Models.Dtos.Blog;
 using Kodikos.Models.Dtos.Issue;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Kodikos.API.Extentions;
 
 namespace Kodikos.API.Controllers
 {
@@ -16,13 +17,14 @@ namespace Kodikos.API.Controllers
         readonly IEmployeeRepository employeeRepository;
         readonly IBlogRepository blogRepository;
         readonly IIssueRepository issueRepository;
+        readonly ITagRepository tagRepository;
 
-        public IssueController(IEmployeeRepository employeeRepository, IBlogRepository blogRepository, IIssueRepository issueRepository)
+        public IssueController(IEmployeeRepository employeeRepository, IBlogRepository blogRepository, IIssueRepository issueRepository, ITagRepository tagRepository)
         {
             this.employeeRepository = employeeRepository;
             this.blogRepository = blogRepository;
             this.issueRepository = issueRepository;
-
+            this.tagRepository = tagRepository;
         }
 
         [HttpGet("{issueId}")]
@@ -44,6 +46,14 @@ namespace Kodikos.API.Controllers
             }
 
             var issueReadDto = issue.ToDto(employee);
+
+            IEnumerable<Tag> tagsList = await this.tagRepository.GetTags();
+
+            IEnumerable<string> tagsListAsStrings =  tagsList.GetIssueTags(await this.tagRepository.GetIssuesHasTags(), issueReadDto.IssueId);
+
+            issueReadDto.Tags = tagsListAsStrings.ToList();
+
+            //issueReadDto.Tags = (await this.tagRepository.GetTags()).GetIssueTags(await this.tagRepository.GetIssuesHasTags(),issueReadDto.IssueId).ToList();
 
             return Ok(issueReadDto);
         }

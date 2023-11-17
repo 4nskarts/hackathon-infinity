@@ -27,3 +27,16 @@ CREATE TABLE Blogs (
     Issue_Id INT REFERENCES Issues(Issue_Id),
     Body NVARCHAR(4000) NOT NULL
 );
+
+
+CREATE TABLE Tags (
+    Tag_Id INT PRIMARY KEY IDENTITY(1,1),
+    Name NVARCHAR(20) NOT NULL Unique
+);
+
+
+CREATE TABLE IssuesHasTags (
+    IssueHasTag_Id INT PRIMARY KEY IDENTITY(1,1),
+    Issue_Id INT REFERENCES Issues(Issue_Id),
+    Tag_Id INT REFERENCES Tags(Tag_Id)
+);

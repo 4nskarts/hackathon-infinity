@@ -5,7 +5,7 @@ namespace Kodikos.API.Extentions
 {
     public static class IssueExtentions
     {
-
+        
         public static IssueReadDto ToDto(this Issue issue,Employee writer)
         {
             return new IssueReadDto()
