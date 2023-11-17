@@ -17,7 +17,7 @@ namespace Kodikos.Models.Dtos.Issue
         public EmployeeReadDto Writer { get; set; } = null!;
         required public string Title { get; set; }
         required public string Body { get; set; }
-
+        required public DateTime PublishTime { get; set; }
 
     }
 }

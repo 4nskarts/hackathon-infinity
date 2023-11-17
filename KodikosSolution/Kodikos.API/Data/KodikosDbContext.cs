@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using Kodikos.API.Entities;
 using Microsoft.EntityFrameworkCore;
+using Kodikos.API.Entities;
 
 namespace Kodikos.API.Data;
 
@@ -24,9 +24,9 @@ public partial class KodikosDbContext : DbContext
 
     public virtual DbSet<Issue> Issues { get; set; }
 
-    private readonly string ConnectionString = "Data Source = .; Initial Catalog = KodikosDB; User Id = sa; Password=sa123456; Trusted_Connection=true;Encrypt=false;";
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlServer(ConnectionString);
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+        => optionsBuilder.UseSqlServer("Data Source = .; Initial Catalog = KodikosDB; User Id = sa; Password=sa123456; Trusted_Connection=true;Encrypt=false;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
