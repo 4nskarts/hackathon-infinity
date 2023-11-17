@@ -35,8 +35,14 @@ const BlogPage = ({ issues }) => {
   }
 
   return (
-    <div className="bg-gray-200 h-full w-full border-2 border-gray-200">
-      <div className="max-w-3xl mx-auto mt-8 p-4 bg-white shadow-lg rounded-md">
+    <div className="bg-gray-200 flex h-full w-full ">
+      <div
+        className="text-2xl font-bold items-center cursor-pointer align-middle mt-5 ml-5"
+        onClick={() => {}}
+      >
+        Ξ
+      </div>
+      <div className="max-w-3xl mx-auto mt-8 p-4 justify-start mb-10 bg-white shadow-lg rounded-md">
         <h1 className="text-3xl font-bold mb-4">{issue.title}</h1>
         <div className="flex items-center  text-gray-600 mb-4">
           <span className="mr-2">
