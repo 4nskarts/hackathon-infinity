@@ -28,7 +28,7 @@ function Footer() {
   ];
 
   return (
-    <section className="flex flex-col bg-white-grey">
+    <section className="flex flex-col bg-white-grey text-blue">
       <div className="flex justify-center gap-7 items-center p-5">
         <div className="flex flex-wrap gap-4">
           {footerLinks1.map((link, index) => (

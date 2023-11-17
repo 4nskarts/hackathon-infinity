@@ -99,5 +99,3 @@ function LoginPage() {
 }
 
 export default LoginPage;
-
-// backup tailwind css for the upper-most forgot password modal: w-screen h-screen fixed inset-0
