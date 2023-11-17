@@ -13,14 +13,14 @@ function LandingPage() {
     return (
       <main className="flex flex-col bg-white-white-grey">
         <Navbar />
-        {/* <Hero /> */}
+        <Hero />
         {/* <SocialProof /> */}
         <Features />
-        {/* <Testimonial /> */}
-        {/* <About /> */}
+        <Testimonial />
+        <About />
         {/* <Statistics /> */}
-        {/* <CallToAction /> */}
-        {/* <Footer /> */}
+        <CallToAction />
+        <Footer />
       </main>
     );
 }
