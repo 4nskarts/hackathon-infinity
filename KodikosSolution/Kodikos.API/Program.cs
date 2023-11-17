@@ -20,6 +20,7 @@ builder.Services.AddDbContext<KodikosDbContext>();
 builder.Services.AddScoped< IEmployeeRepository , EmployeeRepository >();
 builder.Services.AddScoped< IBlogRepository     , BlogRepository     >();
 builder.Services.AddScoped< IIssueRepository    , IssueRepository    >();
+builder.Services.AddScoped< ICompanyRepository  , CompanyRepository  >();
 
 builder.Services.AddSwaggerGen(c=>
 {

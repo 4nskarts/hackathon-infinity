@@ -2,6 +2,7 @@
 using Kodikos.API.Entities;
 using Kodikos.API.Extentions;
 using Kodikos.API.Repositories.Interfaces;
+using Kodikos.Models.Dtos.Issue;
 using Microsoft.EntityFrameworkCore;
 
 namespace Kodikos.API.Repositories.Implimentations
@@ -57,9 +58,14 @@ namespace Kodikos.API.Repositories.Implimentations
             return true;
         }
 
-        public async Task<IEnumerable<Issue>> ReadAllIssues()
+        public async Task<IEnumerable<IssueReadDto>> ReadCompanyIssues(int companyId)
         {
-            return await this.dbContext.Issues.ToListAsync();
+            IEnumerable<Issue> issues = await this.dbContext.Issues.ToListAsync();
+            IEnumerable<Employee> employees = await this.dbContext.Employees.Where(e=>e.CompanyId == companyId).ToListAsync();
+
+            return (issues.ToDto(employees));
         }
+
+        
     }
 }

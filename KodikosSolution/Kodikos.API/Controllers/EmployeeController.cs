@@ -19,6 +19,7 @@ namespace Kodikos.API.Controllers
     [ApiController]
     public class EmployeeController : ControllerBase
     {
+
         private readonly IConfiguration configuration;
         private readonly IEmployeeRepository employeeRepository;
         private readonly ICompanyRepository companyRepository;
@@ -32,19 +33,32 @@ namespace Kodikos.API.Controllers
 
         PasswordHashService passwordHashService { get; set; }
 
-        [HttpGet("{companyeeId}")]
+        [HttpGet("all/{companyeeId}")]
         public async Task<ActionResult<IEnumerable<EmployeeReadDto>>> GetAllEmployees(int companyeeId)
         {
 
             Company? company = await companyRepository.GetCompany(companyeeId);
 
-            if(company == null)
+            if (company == null)
             {
                 return BadRequest("Company Does not exist");
             }
 
-            return Ok (await this.employeeRepository.GetEmployees(companyeeId));
+            return Ok(await this.employeeRepository.GetEmployees(companyeeId));
 
+        }
+
+        [HttpGet("{employeeId}")]
+        public async Task<ActionResult<EmployeeReadDto>> GetEmployee(int employeeId)
+        {
+            Employee? employee = await this.employeeRepository.GetEmployee(employeeId);
+
+            if(employee == null)
+            {
+                return NotFound("Employee Not Found");
+            }
+
+            return employee.ToReadDto();
         }
 
         [HttpPost("register")]
@@ -65,7 +79,7 @@ namespace Kodikos.API.Controllers
 
         [HttpPost("login")]
 
-        public async Task<ActionResult<EmployeeReadDto>> Login([FromBody] EmployeeLoginDto loginEmployee)
+        public async Task<ActionResult<Tuple<EmployeeReadDto,string>>> Login([FromBody] EmployeeLoginDto loginEmployee)
         {
             Employee? employee = await this.employeeRepository.GetEmployee(loginEmployee.Email);
             
@@ -81,7 +95,8 @@ namespace Kodikos.API.Controllers
 
             string token = GenerateJwtToken(employee);// Token -> Cancel auth
 
-            return Ok (employee.ToReadDto());
+            //return Ok (new Tuple<EmployeeReadDto,string> ( employee.ToReadDto() ,(await this.companyRepository.GetCompany(employee.CompanyId.GetValueOrDefault())).Name));
+            return Ok(employee.ToReadDto());
         }
 
         private string GenerateJwtToken(Employee employee)
@@ -162,6 +177,7 @@ namespace Kodikos.API.Controllers
                 return true;
             }
         }
+    
     }
 
 }

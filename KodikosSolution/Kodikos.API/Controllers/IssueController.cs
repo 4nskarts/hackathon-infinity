@@ -121,21 +121,21 @@ namespace Kodikos.API.Controllers
             return BadRequest("Something goes wrong");
         }
 
-        [HttpGet]
+        [HttpGet("company/{companyId}")]
 
-        public async Task<ActionResult<IEnumerable<Issue>>> GetAllIssues()
+        public async Task<ActionResult<IEnumerable<Issue>>> GetAllIssues(int companyId)
         {
-            return Ok (await this.issueRepository.ReadAllIssues() );
+            return Ok (await this.issueRepository.ReadCompanyIssues(companyId) );
         }
 
         [HttpGet("{companyId}/{pattern}")]
         public async Task<ActionResult<IEnumerable<IssueReadDto>>> SearchPatternInIssues(int companyId,string pattern)
         {
-            IEnumerable<Issue> issues =  await this.issueRepository.ReadAllIssues();
+            IEnumerable<IssueReadDto> issues =  await this.issueRepository.ReadCompanyIssues(companyId);
             IEnumerable<string> pattern_words = pattern.Split(' ');
-            Dictionary<Issue, int> issuesPriority = new Dictionary<Issue, int>(); 
+            Dictionary<IssueReadDto, int> issuesPriority = new Dictionary<IssueReadDto, int>(); 
 
-            foreach(Issue issue in issues)
+            foreach(IssueReadDto issue in issues)
             {
                 IEnumerable<string> issue_words = issue.Title.Split(' ');
                 IEnumerable<string> body_words  = issue.Body!.Split(' ');
@@ -178,14 +178,16 @@ namespace Kodikos.API.Controllers
 
             var OrdredIssueList = issuesPriority.OrderByDescending(e=>e.Value).ToList();
 
-            List<Issue> OrdredIssues = new List<Issue>();
+            List<IssueReadDto> OrdredIssues = new List<IssueReadDto>();
 
             foreach (var i in OrdredIssueList)
             {
                 OrdredIssues.Add(i.Key);
             }
 
-            return Ok( OrdredIssues.ToDto(await employeeRepository.GetEmployees(companyId)) );
+            return Ok( OrdredIssues );
         }
+
+        
     }
 }
