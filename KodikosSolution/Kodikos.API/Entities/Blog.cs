@@ -21,6 +21,9 @@ public partial class Blog
     [StringLength(4000)]
     public string Body { get; set; } = null!;
 
+    [Column(TypeName = "datetime")]
+    public DateTime? PublishTime { get; set; }
+
     [ForeignKey("IssueId")]
     [InverseProperty("Blogs")]
     public virtual Issue? Issue { get; set; }

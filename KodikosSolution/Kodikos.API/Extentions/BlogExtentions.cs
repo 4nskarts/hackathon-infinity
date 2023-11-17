@@ -14,6 +14,7 @@ namespace Kodikos.API.Extentions
                 BlogId = blog.BlogId,
                 Body = blog.Body,
                 Writer = employee.ToDto(),
+                PublishTime = blog.PublishTime.GetValueOrDefault(),
             };
         }
 
@@ -28,6 +29,7 @@ namespace Kodikos.API.Extentions
                        WriterId = b.WriterId.GetValueOrDefault(),
                        Body = b.Body,
                        Writer = e.ToDto(),
+                       PublishTime = b.PublishTime.GetValueOrDefault(),
                    };
         }
 

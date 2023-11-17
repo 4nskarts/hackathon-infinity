@@ -22,6 +22,7 @@ function LandingPage() {
         {/* <CallToAction /> */}
         {/* <Footer /> */}
       </main>
+
     );
 }
 

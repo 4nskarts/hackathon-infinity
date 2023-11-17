@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
+import PrimaryButton from "./PrimaryButton";
+import SecondaryButton from "./SecondaryButton";
 
 const links = [
   { id: "home", text: "HOME" },
-  { id: "events", text: "EVENTS" },
-  { id: "partners", text: "PARTNERS" },
   { id: "contact-us", text: "CONTACT US" },
-  { id: "faq", text: "FAQ" },
+  { id: "about", text: "ABOUT" },
 ];
 
 function Navbar() {
@@ -41,63 +41,46 @@ function Navbar() {
   }, [isSidebarOpen]);
 
   return (
-    <nav className="flex flex-row font-Quicksand justify-between md:justify-around items-center bg-transparent w-full p-4 font-poppins">
+    <nav className="h-16 flex fixed flex-row items-center justify-between md:justify-around  bg-white w-full font-poppins  top-0 px-4">
       <div
-        className="md:hidden text-2xl cursor-pointer font-medium ml-5" // Adjusted size here
+        className="md:hidden text-2xl font-bold items-center cursor-pointer align-middle ml-5"
         onClick={toggleSidebar}
       >
-        ☰
+        Ξ
       </div>
-      <section className="flex items-center space-x-2 md:space-x-4">
-        <div className="flex flex-col">
-          <div className="text-sm md:text-base cursor-pointer font-bold">
-            Google Developer Student Club
-          </div>
-          <div className="text-xs md:text-sm cursor-pointer font-semibold">
-            ESI Sidi Bel Abbes
-          </div>
+      <div className="text-xl ml-auto md:ml-0 cursor-pointer md:text-[17px] font-bold mx-4">
+        INFINITY
+      </div>
+      {isSidebarOpen ? (
+        <div className="md:hidden fixed top-0 left-0 h-full w-60 bg-gray-800 text-white p-4 flex flex-col open">
+          {links.map((link) => (
+            <a
+              key={link.id}
+              href={`#${link.id}`}
+              className="block py-2 font-semibold text-sm"
+              onClick={closeSidebar}
+            >
+              {link.text}
+            </a>
+          ))}
         </div>
-      </section>
-      <section className="hidden md:flex gap-4 items-center">
-        {links.map((link) => (
-          <a
-            key={link.id}
-            href={`#${link.id}`}
-            className="font-semibold text-xs md:text-sm lg:text-base" // Adjusted size here
-          >
-            {link.text}
-          </a>
-        ))}
-      </section>
-      {isSidebarOpen && (
-        <div className="md:hidden fixed top-0 left-0 h-full w-1/3 bg-gray-800 text-white p-4 flex flex-col open">
-          {" "}
-          {/* Adjusted width here */}
-          <div className="mb-4">
-            {links.map((link) => (
-              <a
-                key={link.id}
-                href={`#${link.id}`}
-                className="block py-2 font-semibold text-xs md:text-sm" // Adjusted size here
-                onClick={closeSidebar}
-              >
-                {link.text}
-              </a>
-            ))}
-          </div>
-          <div className="flex-grow"></div>
-          <div className="mb-2 flex items-center">
-            <div className="flex flex-col items-center justify-center">
-              <div className="text-xs md:text-sm font-semibold pt-1">
-                Google Developer Student Club
-              </div>
-              <div className="text-xs md:text-sm font-semibold">
-                ESI Sidi Bel Abbes
-              </div>
-            </div>
-          </div>
-        </div>
+      ) : (
+        <section className="hidden md:flex flex-row space-x-8">
+          {links.map((link) => (
+            <a
+              key={link.id}
+              href={`#${link.id}`}
+              className="text-gray-700 hover:text-gray-900"
+            >
+              {link.text}
+            </a>
+          ))}
+        </section>
       )}
+      <section className="flex flex-row items-center space-x-4">
+        <PrimaryButton text="Get Started" />
+        <SecondaryButton text="Login" />
+      </section>
     </nav>
   );
 }
