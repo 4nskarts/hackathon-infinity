@@ -1,6 +1,7 @@
 ﻿using Kodikos.API.Data;
 using Kodikos.API.Entities;
 using Kodikos.API.Repositories.Interfaces;
+using Microsoft.AspNetCore.Server.IIS.Core;
 using Microsoft.EntityFrameworkCore;
 
 namespace Kodikos.API.Repositories.Implimentations
@@ -12,17 +13,37 @@ namespace Kodikos.API.Repositories.Implimentations
         {
             this.dbContext = dbContext;
         }
+
+        public async Task<bool> DeleteBlog(int blogid)
+        {
+            Blog? blog = await dbContext.Blogs.FirstOrDefaultAsync();
+            this.dbContext.Blogs.Remove(blog);
+            await this.dbContext.SaveChangesAsync();
+
+            return true;
+        }
+
+        public async Task<bool> DeleteBlogsOfIssue(int issueid)
+        {
+
+            IEnumerable< Blog > blogsToRemoved = this.dbContext.Blogs.Where(b => b.IssueId == issueid);
+            this.dbContext.Blogs.RemoveRange(blogsToRemoved);
+            await this.dbContext.SaveChangesAsync();
+
+            return true;
+        }
+
         public async Task<Blog?> GetBlog(int id)
         {
             return await this.dbContext.Blogs.Where(b=>b.BlogId == id).FirstOrDefaultAsync();
         }
 
-        public async Task<IEnumerable<Blog>> GetBlogsForEmployee(int employeeId)
+        public async Task<IEnumerable<Blog>> GetBlogsOfEmployee(int employeeId)
         {
             return await this.dbContext.Blogs.Where(b => b.WriterId == employeeId).ToListAsync();
         }
 
-        public async Task<IEnumerable<Blog>> GetBlogsForIssue(int issueId)
+        public async Task<IEnumerable<Blog>> GetBlogsOfIssue(int issueId)
         {
             return await this.dbContext.Blogs.Where(b => b.IssueId == issueId).ToListAsync();
         }

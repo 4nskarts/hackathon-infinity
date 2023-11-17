@@ -16,6 +16,7 @@ namespace Kodikos.API.Controllers
         readonly IEmployeeRepository employeeRepository;
         readonly IBlogRepository blogRepository;
         readonly IIssueRepository issueRepository;
+
         public IssueController(IEmployeeRepository employeeRepository, IBlogRepository blogRepository, IIssueRepository issueRepository)
         {
             this.employeeRepository = employeeRepository;
@@ -28,7 +29,7 @@ namespace Kodikos.API.Controllers
 
         public async Task<ActionResult<IssueReadDto>> GetIssue(int issueId)
         {
-            Issue? issue = await this.issueRepository.GetIssue(issueId);
+            Issue? issue = await this.issueRepository.ReadIssue(issueId);
 
             if (issue == null)
             {
@@ -37,7 +38,7 @@ namespace Kodikos.API.Controllers
 
             Employee? employee = await this.employeeRepository.GetEmployee(issue.WriterId.GetValueOrDefault());
 
-            if(employee == null)
+            if (employee == null)
             {
                 return BadRequest("Can not found the issue writer");
             }
@@ -49,14 +50,14 @@ namespace Kodikos.API.Controllers
 
         public async Task<ActionResult<IEnumerable<BlogReadDto>>> GetBlogsOfIssue(int issueId)
         {
-            Issue? issue = await this.issueRepository.GetIssue(issueId);
+            Issue? issue = await this.issueRepository.ReadIssue(issueId);
 
             if (issue == null)
             {
                 return BadRequest("Issue Not Found");
             }
 
-            IEnumerable<Blog> blogs = await this.blogRepository.GetBlogsForIssue(issueId);
+            IEnumerable<Blog> blogs = await this.blogRepository.GetBlogsOfIssue(issueId);
 
             if (blogs == null || blogs.Count() == 0)
             {
@@ -85,12 +86,12 @@ namespace Kodikos.API.Controllers
         {
             Issue? issue = (await issueRepository.AddIssue(issueCreateDto.toEntity()));
 
-            if(issue == null) { return BadRequest("This Should not happen"); }
+            if (issue == null) { return BadRequest("This Should not happen"); }
 
             Employee? employee = await this.employeeRepository.GetEmployee(issue.WriterId.GetValueOrDefault());
 
 
-            return issue.toDto(employee);
+            return Ok(issue.toDto(employee));
         }
 
         [HttpPut]
@@ -100,10 +101,24 @@ namespace Kodikos.API.Controllers
 
             if (issue == null) { return BadRequest("This Should not happen"); }
 
+
             Employee? employee = await this.employeeRepository.GetEmployee(issue.WriterId.GetValueOrDefault());
 
-            return issue.toDto(employee);
+            return Ok(issue.toDto(employee));
         }
 
+        [HttpDelete("{issueId}")]
+
+        public async Task<ActionResult> DeleteIssue(int issueId)
+        {
+            await this.blogRepository.DeleteBlogsOfIssue(issueId);
+
+            if(await this.issueRepository.DeleteIssue(issueId))
+            {
+                return Ok("Deleted Successfuly");
+            }
+
+            return BadRequest("Something goes wrong");
+        }
     }
 }
