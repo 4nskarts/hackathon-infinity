@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import PrimaryButton from "./PrimaryButton";
 import ThirdButton from "./ThirdButton";
+import { NavLink } from "react-router-dom";
 // SearchBar.js
 
 const SearchBar = () => {
@@ -73,7 +74,10 @@ function NavbarHome() {
             {/* Add search bar component here if needed */}
             <div className="flex flex-col mb-2 justify-between">
               <ThirdButton text="Logout" />
-              <ThirdButton text="Profile" />
+              <NavLink to="/profile">
+                className="py-2.5 px-10 rounded-lg text-sm bg-white text-black
+                border-solid border-2 border-black" Profile
+              </NavLink>
             </div>
           </div>
           <div className="pointer-events-none z-40 fixed top-0 left-[240px] bottom-0 right-0 bg-[rgba(0,0,0,0.6)] "></div>
