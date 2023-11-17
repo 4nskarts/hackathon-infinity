@@ -6,7 +6,6 @@ export default function useFetch(url, options) {
     const [error, setError] = useState();
 
     fetch(url, {
-        method: "GET",
         ...options,
     })
         .then((response) => {
@@ -14,6 +13,7 @@ export default function useFetch(url, options) {
         })
         .then((response_data) => {
             setData(response_data);
+            console.log(response_data)
         })
         .catch((err) => {
             setError(err);
