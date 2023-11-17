@@ -27,4 +27,8 @@ public partial class Issue
     [ForeignKey("WriterId")]
     [InverseProperty("Issues")]
     public virtual Employee? Writer { get; set; }
+
+    [Required]
+    [Column(TypeName = "DateTime")]
+    public DateTime PublishTime { get; set; }
 }
