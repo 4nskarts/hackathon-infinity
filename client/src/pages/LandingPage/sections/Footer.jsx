@@ -16,19 +16,17 @@ const FooterImage = () => (
 
 function Footer() {
   const footerLinks1 = [
-    { href: "#", text: "Product" },
+    { href: "#", text: "Contact" },
     { href: "#", text: "Features" },
-    { href: "#", text: "Resources" },
   ];
 
   const footerLinks2 = [
     { href: "#", text: "About" },
     { href: "#", text: "Features" },
-    { href: "#", text: "Resources" },
   ];
 
   return (
-    <section className="flex flex-col bg-white-grey text-blue">
+    <section className="flex flex-col bg-[#eef2f3] text-black">
       <div className="flex justify-center gap-7 items-center p-5">
         <div className="flex flex-wrap gap-4">
           {footerLinks1.map((link, index) => (
@@ -36,7 +34,7 @@ function Footer() {
           ))}
         </div>
         <div className="p-5 font-semibold text-h5">
-          <FooterLink href="#" text="TRADE" />
+          <FooterLink href="#" text="INFINITY" />
         </div>
         <div className="flex flex-wrap gap-4">
           {footerLinks2.map((link, index) => (
@@ -53,7 +51,7 @@ function Footer() {
         ))}
       </div> */}
       <div className="text-center text-caption p-4">
-        © 2010 — 2020 Privacy — Terms
+        © 2023 — 2024 Privacy — Terms
       </div>
     </section>
   );
