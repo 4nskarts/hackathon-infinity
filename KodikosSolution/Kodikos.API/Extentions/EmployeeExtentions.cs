@@ -6,7 +6,7 @@ namespace Kodikos.API.Extentions
     public static class EmployeeExtentions
     {
 
-        public static EmployeeReadDto ToDto(this Employee employee)
+        public static EmployeeReadDto ToReadDto(this Employee employee)
         {
             return new EmployeeReadDto()
             {
@@ -17,6 +17,20 @@ namespace Kodikos.API.Extentions
                 LastName = employee.LastName,
                 IsAdmin = employee.IsAdmin,
                 Phone = employee.Phone,
+            };
+        }
+
+        public static Employee ToEntity(this EmployeeRegisterDto registerDto)
+        {
+            return new Employee()
+            {
+                FirstName = registerDto.FirstName,
+                LastName = registerDto.LastName,
+                CompanyId = registerDto.CompanyId,
+                Email = registerDto.Email,
+                IsAdmin = registerDto.IsAdmin,
+                HashedPassword = registerDto.Password,
+                Phone = registerDto.Phone
             };
         }
 

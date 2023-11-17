@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "xKF1/oE4H2b2c62ieIMKRbiBICVQ+j12Pk0OZtZ5ko/b2HTaJQ4gJOueMueMNebx4D1fLeoUXhCFA3McmbvM6A==",
+  "dgSpecHash": "jP7f5HCp5rona67LQKqFAgW4pXWeyqYcTQYbxktvTznlH7iSX7c7ezkm91oGHaBz8Ef6TzpAIrLf6ZI8ztpeOg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\houda\\Desktop\\hackathon-infinity\\KodikosSolution\\Kodikos.API\\Kodikos.API.csproj",
+  "projectFilePath": "C:\\Users\\houda\\Desktop\\d\\hackathon-infinity\\KodikosSolution\\Kodikos.API\\Kodikos.API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\houda\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\houda\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",

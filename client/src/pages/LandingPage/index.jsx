@@ -8,6 +8,8 @@ import About from "./sections/About";
 import Statistics from "./sections/Statistics";
 import CallToAction from "./sections/CallToAction";
 import Footer from "./sections/Footer";
+
+
 function LandingPage() {
     return (
         <main className="flex flex-col bg-[#D9D9D9]">
