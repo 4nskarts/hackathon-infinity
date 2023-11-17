@@ -15,12 +15,12 @@ function LandingPage() {
       <main className="flex flex-col bg-[#D9D9D9] font-Quicksand">
         <Navbar />
         <Hero />
-        <CallToAction />
-        <About />
+        {/* <CallToAction /> */}
         <Features />
+        {/* <About /> */}
         <Testimonial />
-        <SocialProof />
-        <Statistics />
+        {/* <SocialProof /> */}
+        {/* <Statistics /> */}
         <Footer />
       </main>
     );

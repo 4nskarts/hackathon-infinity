@@ -10,7 +10,7 @@ function About() {
   ];
 
   return (
-    <div className="font-Quicksand py-7 text-center">
+    <div className="font-Quicksand  py-7 text-center">
       <div className="text-black text-h4">
         Trusted by the World’s Best Companies
       </div>

@@ -1,3 +1,5 @@
+const defaultTheme = require('tailwindcss/defaultTheme')
+
 // tailwind.config.js
 module.exports = {
   content: [
@@ -5,6 +7,10 @@ module.exports = {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+    screens: {
+        'mlm': '930px',
+        ...defaultTheme.screens
+    },  
     extend: {
       fontFamily: {
         'Quicksand': ['Quicksand', 'sans-serif'],
