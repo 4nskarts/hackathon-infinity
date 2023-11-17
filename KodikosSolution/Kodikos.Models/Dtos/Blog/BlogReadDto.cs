@@ -19,5 +19,6 @@ namespace Kodikos.Models.Dtos.Blog
 
         required public string Body { get; set; } = null!;
 
+        required public DateTime PublishTime { get; set; }
     }
 }

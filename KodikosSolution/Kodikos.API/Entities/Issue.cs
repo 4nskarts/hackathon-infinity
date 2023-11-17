@@ -28,7 +28,4 @@ public partial class Issue
     [InverseProperty("Issues")]
     public virtual Employee? Writer { get; set; }
 
-    [Required]
-    [Column(TypeName = "DateTime")]
-    public DateTime PublishTime { get; set; }
 }
