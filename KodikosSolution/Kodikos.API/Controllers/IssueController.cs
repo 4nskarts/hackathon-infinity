@@ -43,7 +43,7 @@ namespace Kodikos.API.Controllers
                 return BadRequest("Can not found the issue writer");
             }
 
-            return Ok(issue.toDto(employee));
+            return Ok(issue.ToDto(employee));
         }
 
         [HttpGet("{issueId}/blogs")]
@@ -57,7 +57,7 @@ namespace Kodikos.API.Controllers
                 return BadRequest("Issue Not Found");
             }
 
-            IEnumerable<Blog> blogs = await this.blogRepository.GetBlogsOfIssue(issueId);
+            IEnumerable<Blog> blogs = await this.blogRepository.CreatBlogsOfIssue(issueId);
 
             if (blogs == null || blogs.Count() == 0)
             {
@@ -73,7 +73,7 @@ namespace Kodikos.API.Controllers
 
             IEnumerable<Employee> employees = await this.employeeRepository.GetEmployees(employee.CompanyId.GetValueOrDefault());
 
-            IssueReadDto issueReadDto = issue.toDto(employee);
+            IssueReadDto issueReadDto = issue.ToDto(employee);
 
 
             IEnumerable<BlogReadDto> blogsReadDto = blogs.ToDto(employees);
@@ -84,27 +84,27 @@ namespace Kodikos.API.Controllers
         [HttpPost]
         public async Task<ActionResult<IssueReadDto>> AddIssue([FromBody] IssueCreateDto issueCreateDto)
         {
-            Issue? issue = (await issueRepository.AddIssue(issueCreateDto.toEntity()));
+            Issue? issue = (await issueRepository.AddIssue(issueCreateDto.ToEntity()));
 
             if (issue == null) { return BadRequest("This Should not happen"); }
 
             Employee? employee = await this.employeeRepository.GetEmployee(issue.WriterId.GetValueOrDefault());
 
 
-            return Ok(issue.toDto(employee));
+            return Ok(issue.ToDto(employee));
         }
 
         [HttpPut]
         public async Task<ActionResult<IssueReadDto>> UpdateIssue([FromBody] IssueUpdateDto issueCreateDto)
         {
-            Issue? issue = (await issueRepository.UpdateIssue(issueCreateDto.toEntity()));
+            Issue? issue = (await issueRepository.UpdateIssue(issueCreateDto.ToEntity()));
 
             if (issue == null) { return BadRequest("This Should not happen"); }
 
 
             Employee? employee = await this.employeeRepository.GetEmployee(issue.WriterId.GetValueOrDefault());
 
-            return Ok(issue.toDto(employee));
+            return Ok(issue.ToDto(employee));
         }
 
         [HttpDelete("{issueId}")]

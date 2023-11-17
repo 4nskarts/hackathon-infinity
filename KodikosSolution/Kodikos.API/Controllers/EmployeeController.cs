@@ -32,7 +32,7 @@ namespace Kodikos.API.Controllers
 
         [HttpGet]
         [Authorize(Roles = "Admin")]
-        public ActionResult<string> Test()
+        private ActionResult<string> Test()
         {
             return "Hi";
         }

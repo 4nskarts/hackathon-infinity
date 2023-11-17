@@ -33,6 +33,18 @@ namespace Kodikos.API.Extentions
                    };
         }
 
+        public static Blog ToEntity(this BlogCreatDto blogCreatDto)
+        {
+            return new Blog()
+            {
+                WriterId = blogCreatDto.WriterId,
+                Body = blogCreatDto.Body,
+                IssueId = blogCreatDto.IssueId,
+                PublishTime = DateTime.Now,
+            };
+        }
 
     }
 }
+
+

@@ -33,19 +33,28 @@ namespace Kodikos.API.Repositories.Implimentations
             return true;
         }
 
-        public async Task<Blog?> GetBlog(int id)
+        public async Task<Blog?> ReadBlog(int id)
         {
             return await this.dbContext.Blogs.Where(b=>b.BlogId == id).FirstOrDefaultAsync();
         }
 
-        public async Task<IEnumerable<Blog>> GetBlogsOfEmployee(int employeeId)
+        public async Task<IEnumerable<Blog>> CreatBlogsOfEmployee(int employeeId)
         {
             return await this.dbContext.Blogs.Where(b => b.WriterId == employeeId).ToListAsync();
         }
 
-        public async Task<IEnumerable<Blog>> GetBlogsOfIssue(int issueId)
+        public async Task<IEnumerable<Blog>> CreatBlogsOfIssue(int issueId)
         {
             return await this.dbContext.Blogs.Where(b => b.IssueId == issueId).ToListAsync();
+        }
+
+        public async Task<Blog> CreatBlog(Blog blog)
+        {
+            Blog b = (await this.dbContext.Blogs.AddAsync(blog)).Entity;
+
+            await this.dbContext.SaveChangesAsync();
+
+            return b;
         }
     }
 }
