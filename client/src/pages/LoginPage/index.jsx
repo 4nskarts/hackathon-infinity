@@ -4,15 +4,15 @@ import { NavLink } from "react-router-dom";
 function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [isVisible, setVisibility] = useState(false);
+  const [selectedOption, setSelectedOption] = useState(null);
 
-  const toggleVisibility = () => {
-    setVisibility(!isVisible);
+  const handleOptionChange = (event) => {
+    setSelectedOption(event.target.value);
   };
 
   // this is the cheap way to do it.
   return (
-    <div className="flex min-h-full h-screen flex-1 flex-col border-2 justify-center items-center px-6 py-12 lg:px-8 ">
+    <div className="flex min-h-full bg-[#D9D9D9] h-screen flex-1 flex-col border-2 justify-center items-center px-6 py-12 lg:px-8 ">
       <div className="mx-auto w-auto text-2xl font-bold">Infinity Website</div>
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
         <h2 className="mt-10 text-center text-2xl font-base leading-9 tracking-tight text-black">
@@ -25,7 +25,7 @@ function LoginPage() {
           <div>
             <label
               htmlFor="email"
-              className="block text-sm font-medium leading-6 text-gray-400"
+              className="block text-sm font-medium leading-6 text-gray-700"
             >
               {/* later we implement this */}
               Company/Employee
@@ -48,16 +48,10 @@ function LoginPage() {
             <div className="flex items-center justify-between">
               <label
                 htmlFor="password"
-                className="block text-sm font-medium leading-6 text-gray-400"
+                className="block text-sm font-medium leading-6 text-gray-700"
               >
                 Password
               </label>
-              <div
-                className="text-sm font-semibold text-yellow-500 hover:text-yellow-700 hover:cursor-pointer"
-                onClick={() => {}}
-              >
-                Forgot password?
-              </div>
             </div>
             <div className="relative flex mt-2">
               <input
@@ -65,7 +59,7 @@ function LoginPage() {
                 name="password"
                 value={password}
                 onChange={(event) => setPassword(event.target.value)}
-                type={isVisible ? "text" : "password"}
+                type="password"
                 autoComplete="current-password"
                 required
                 className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-yellow-700 bg-gray-100 sm:text-sm sm:leading-6"
@@ -82,17 +76,44 @@ function LoginPage() {
               LOGIN
             </button>
           </div>
+          <div className="flex justify-between">
+            <div className="flex justify-center">
+              <label className="flex items-center">
+                <input
+                  type="radio"
+                  value="employee"
+                  checked={selectedOption === "employee"}
+                  onChange={handleOptionChange}
+                  className="mr-2"
+                />
+                <span>
+                  Login as <span className="font-semibold">Employee</span>
+                </span>
+              </label>
+            </div>
+            <div className="">
+              <label className="flex justify-center items-center">
+                <input
+                  type="radio"
+                  value="company"
+                  checked={selectedOption === "company"}
+                  onChange={handleOptionChange}
+                  className="mr-2"
+                />
+                <span>
+                  Login as <span className="font-semibold">Company</span>
+                </span>
+              </label>
+            </div>
+          </div>
         </form>
 
-        <p className="mt-10 text-center text-sm text-gray-500">
-          Don't have an account?{" "}
-          <NavLink
-            to="/"
-            className="font-semibold leading-6 text-yellow-500 hover:text-yellow-600"
-          >
-            Get Started Here
-          </NavLink>
-        </p>
+        {selectedOption && (
+          <div className="mt-4 text-xs justify-center items-center flex">
+            You have selected:{" "}
+            {selectedOption === "employee" ? "Employee" : "Company"}
+          </div>
+        )}
       </div>
     </div>
   );

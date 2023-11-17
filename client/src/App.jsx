@@ -5,6 +5,7 @@ import LandingPage from "./pages/LandingPage";
 import LoginPage from "./pages/LoginPage/index";
 import Home from "./pages/HomePage/Home";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
+import BlogPage from "./pages/BlogPage/BlogPage";
 /* import LoginPage from "./pages/LoginPage/LoginPage"; */
 
 // This is static now, don't remove it
@@ -32,6 +33,7 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/home" element={<Home users={users} issues={issues} />} />
         <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/blog" element={<BlogPage issues={issues} />} />
         {/* <Route path="/login/company" element={<LoginPageCompany />} />
         <Route path="/login/employee" element={<LoginPageEmployee />} /> */}
       </Routes>
