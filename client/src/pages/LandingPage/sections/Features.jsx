@@ -8,7 +8,7 @@ function Features() {
     <section className="w-full flex justify-between items-center mb-12">
       {/* Left Section */}
 
-        <div className="w-1/2 h-[657px] bg-black flex justify-center items-center">
+        <div className="w-1/2 h-[657px] bg-blue flex justify-center items-center">
           <div className="w-[320px] h-[394px] rounded bg-white text-transparent">
             qsmkjdqsjdk
           </div>
@@ -40,7 +40,7 @@ function Features() {
         </div>
         <SecondaryButton text={'Learn more'} />
       </div>
-        <div className="w-1/2 h-[657px] bg-black flex justify-center items-center">
+        <div className="w-1/2 h-[657px] bg-blue flex justify-center items-center">
           <div className="w-[320px] h-[394px] rounded bg-white text-transparent">
             qsmkjdqsjdk
           </div>

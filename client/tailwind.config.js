@@ -15,6 +15,8 @@ module.exports = {
         'white-grey': '#C4C4C4',
         'white-white-grey': '#E5E5E5',
         'white': '#FFFFFF',
+        'blue': '#00509D',
+        'yellow':'#FFD500',
       },
       fontSize: {
         'p': '1em',
