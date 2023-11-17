@@ -8,11 +8,9 @@ import About from "./sections/About";
 import Statistics from "./sections/Statistics";
 import CallToAction from "./sections/CallToAction";
 import Footer from "./sections/Footer";
-//import svg1 from '../LandingPage/styles/assets/'
 function LandingPage() {
     return (
-        <main className="flex flex-col bg-white-white-grey">
-            {/* <img src={ svg1} className=""/> */}
+        <main className="flex flex-col bg-[#D9D9D9]">
             <Navbar />
             <Hero />
             <Features />
