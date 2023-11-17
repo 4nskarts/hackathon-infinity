@@ -11,5 +11,7 @@ namespace Kodikos.API.Repositories.Interfaces
 
         Task<IEnumerable<Employee>> GetEmployees(int companyId);
 
+        Task<Employee?> AddEmployee(Employee employee);
+
     }
 }

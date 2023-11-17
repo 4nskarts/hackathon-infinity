@@ -14,6 +14,14 @@ namespace Kodikos.API.Repositories.Implimentations
             this.dbContext = dbContext;
         }
 
+        public async Task<Employee?> AddEmployee(Employee employee)
+        {
+            this.dbContext.Employees.Add(employee);
+            int rowsAffected = await this.dbContext.SaveChangesAsync();
+
+            return await this.dbContext.Employees.Where(e => e.Email == employee.Email).FirstOrDefaultAsync();
+        }
+
         public async Task<Employee?> GetEmployee(int Id)
         {
             return await this.dbContext.Employees.Where(e=>e.EmployeeId  == Id).FirstOrDefaultAsync();

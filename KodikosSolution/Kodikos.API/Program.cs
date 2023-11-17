@@ -2,7 +2,7 @@ using Kodikos.API.Data;
 using Kodikos.API.Repositories.Implimentations;
 using Kodikos.API.Repositories.Interfaces;
 
-var builder = WebApplication.CreateBuilder(args);
+ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 

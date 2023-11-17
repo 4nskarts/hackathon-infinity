@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\houda\\Desktop\\hackathon-infinity\\KodikosSolution\\Kodikos.API\\Kodikos.API.csproj": {}
+    "C:\\Users\\houda\\Desktop\\d\\hackathon-infinity\\KodikosSolution\\Kodikos.API\\Kodikos.API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\houda\\Desktop\\hackathon-infinity\\KodikosSolution\\Kodikos.API\\Kodikos.API.csproj": {
+    "C:\\Users\\houda\\Desktop\\d\\hackathon-infinity\\KodikosSolution\\Kodikos.API\\Kodikos.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\houda\\Desktop\\hackathon-infinity\\KodikosSolution\\Kodikos.API\\Kodikos.API.csproj",
+        "projectUniqueName": "C:\\Users\\houda\\Desktop\\d\\hackathon-infinity\\KodikosSolution\\Kodikos.API\\Kodikos.API.csproj",
         "projectName": "Kodikos.API",
-        "projectPath": "C:\\Users\\houda\\Desktop\\hackathon-infinity\\KodikosSolution\\Kodikos.API\\Kodikos.API.csproj",
+        "projectPath": "C:\\Users\\houda\\Desktop\\d\\hackathon-infinity\\KodikosSolution\\Kodikos.API\\Kodikos.API.csproj",
         "packagesPath": "C:\\Users\\houda\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\houda\\Desktop\\hackathon-infinity\\KodikosSolution\\Kodikos.API\\obj\\",
+        "outputPath": "C:\\Users\\houda\\Desktop\\d\\hackathon-infinity\\KodikosSolution\\Kodikos.API\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\houda\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -28,8 +28,8 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "C:\\Users\\houda\\Desktop\\hackathon-infinity\\KodikosSolution\\Kodikos.Models\\Kodikos.Models.csproj": {
-                "projectPath": "C:\\Users\\houda\\Desktop\\hackathon-infinity\\KodikosSolution\\Kodikos.Models\\Kodikos.Models.csproj"
+              "C:\\Users\\houda\\Desktop\\d\\hackathon-infinity\\KodikosSolution\\Kodikos.Models\\Kodikos.Models.csproj": {
+                "projectPath": "C:\\Users\\houda\\Desktop\\d\\hackathon-infinity\\KodikosSolution\\Kodikos.Models\\Kodikos.Models.csproj"
               }
             }
           }
@@ -92,14 +92,14 @@
         }
       }
     },
-    "C:\\Users\\houda\\Desktop\\hackathon-infinity\\KodikosSolution\\Kodikos.Models\\Kodikos.Models.csproj": {
+    "C:\\Users\\houda\\Desktop\\d\\hackathon-infinity\\KodikosSolution\\Kodikos.Models\\Kodikos.Models.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\houda\\Desktop\\hackathon-infinity\\KodikosSolution\\Kodikos.Models\\Kodikos.Models.csproj",
+        "projectUniqueName": "C:\\Users\\houda\\Desktop\\d\\hackathon-infinity\\KodikosSolution\\Kodikos.Models\\Kodikos.Models.csproj",
         "projectName": "Kodikos.Models",
-        "projectPath": "C:\\Users\\houda\\Desktop\\hackathon-infinity\\KodikosSolution\\Kodikos.Models\\Kodikos.Models.csproj",
+        "projectPath": "C:\\Users\\houda\\Desktop\\d\\hackathon-infinity\\KodikosSolution\\Kodikos.Models\\Kodikos.Models.csproj",
         "packagesPath": "C:\\Users\\houda\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\houda\\Desktop\\hackathon-infinity\\KodikosSolution\\Kodikos.Models\\obj\\",
+        "outputPath": "C:\\Users\\houda\\Desktop\\d\\hackathon-infinity\\KodikosSolution\\Kodikos.Models\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\houda\\AppData\\Roaming\\NuGet\\NuGet.Config",
