@@ -15,6 +15,7 @@ namespace Kodikos.API.Extentions
                 IssueId = issue.IssueId,
                 Title = issue.Title,
                 Writer = writer.ToDto(),
+                PublishTime = issue.PublishTime.GetValueOrDefault(),
             };
         }
 

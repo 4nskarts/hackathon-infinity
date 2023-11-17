@@ -21,11 +21,13 @@ public partial class Issue
     [StringLength(1000)]
     public string? Body { get; set; }
 
+    [Column(TypeName = "datetime")]
+    public DateTime? PublishTime { get; set; }
+
     [InverseProperty("Issue")]
     public virtual ICollection<Blog> Blogs { get; set; } = new List<Blog>();
 
     [ForeignKey("WriterId")]
     [InverseProperty("Issues")]
     public virtual Employee? Writer { get; set; }
-
 }
