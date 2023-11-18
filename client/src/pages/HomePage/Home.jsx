@@ -1,11 +1,59 @@
 import React, { useState, useEffect } from "react";
 import NavbarHome from "../../components/NavBarHome";
 import "./Card.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { url } from "../../helpers/url";
 import { getUser } from "../../helpers/auth";
 
 const Home = () => {
+  const [title, setTitle] = useState("");
+  const [body, setBody] = useState("");
+  const [tags, setTags] = useState("");
+  const navigate = useNavigate();
+
+  async function handleCreateIssue(formData) {
+    try {
+      // Assuming you have an API endpoint for creating an issue
+      const response = await fetch(`${url}/infinity/Issue`, {
+        method: "POST",
+        headers: {
+          "ngrok-skip-browser-warning": "69420",
+          "Content-Type": "application/json",
+          // You may need to include additional headers like authorization
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        // The issue was successfully created
+        console.log("Issue created successfully");
+        closeModal();
+        navigate(0); // Close the modal after successful creation
+      } else {
+        // Handle the case where the issue creation fails
+        console.error("Failed to create issue");
+        // You might want to display an error message to the user
+      }
+    } catch (error) {
+      console.error("Error creating issue", error);
+      // Handle the case where there's a network error or other issue
+    }
+  }
+
+  const user = getUser();
+  const user_id = user.employeeId;
+  console.log(user_id);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Pass the form data to the handleCreateIssue function
+    const formdata = {
+      writerId: user_id,
+      title: title,
+      body: body,
+    };
+    handleCreateIssue(formdata);
+  };
   const [issues, setIssues] = useState([]);
 
   useEffect(() => {
@@ -42,7 +90,7 @@ const Home = () => {
     }
   };
 
-  const tags = ["#tech", "#finance", "#FGI"];
+  const tags_static = ["#tech", "#finance", "#FGI"];
 
   const formatDate = (date) => {
     return new Date(date).toLocaleString();
@@ -56,12 +104,6 @@ const Home = () => {
 
   const closeModal = () => {
     setIsModalOpen(false);
-  };
-
-  const handleCreateIssue = () => {
-    // Add logic to handle creating a new issue
-    // This is where you might make an API call to create a new issue
-    closeModal();
   };
 
   return (
@@ -122,60 +164,58 @@ const Home = () => {
           </div>
         </div>
       )}
-      <>
-        <NavbarHome />
-        <div className="mt-16">
-          <div className="flex-col h-full md:h-screen items-center flex md:grid grid-cols-1 md:grid-cols-2 bg-gray-200 lg:grid-cols-4 gap-0 p-8">
-            {issues &&
-              issues.map((issue, index) => (
-                <div
-                  key={index}
-                  className="max-w-sm mx-2 my-8 bg-white shadow-lg rounded-lg"
-                >
-                  <div className="flex justify-center items-center px-6 py-4">
-                    <div className="flex justify-center items-center">
-                      <img
-                        src="https://i.pinimg.com/originals/98/1d/6b/981d6b2e0ccb5e968a0618c8d47671da.jpg"
-                        alt="User Profile"
-                        className=" rounded-full mt-0 mr-4"
-                      ></img>
-                    </div>
-                    <div>
-                      <div className="text-xl font-semibold text-gray-800">
-                        {issue.writer.firstName + " " + issue.writer.lastName}
-                      </div>
-                      <p className="text-gray-600 text-sm">
-                        {formatDate(issue.publishTime)}
-                      </p>
-                    </div>
+      <NavbarHome />
+      <div className="mt-16 ">
+        <div className="flex-col h-full md:h-screen items-center flex md:grid grid-cols-1 md:grid-cols-2 bg-gray-200 lg:grid-cols-4 gap-0 p-8">
+          {issues &&
+            issues.map((issue, index) => (
+              <div
+                key={index}
+                className="max-w-sm mx-2 my-8 bg-white shadow-lg rounded-lg"
+              >
+                <div className="flex justify-center items-center px-6 py-4">
+                  <div className="flex justify-center items-center">
+                    <img
+                      src="https://i.pinimg.com/originals/98/1d/6b/981d6b2e0ccb5e968a0618c8d47671da.jpg"
+                      alt="User Profile"
+                      className=" rounded-full mt-0 mr-4"
+                    ></img>
                   </div>
-                  <hr className="border-t" />
-                  <div className="px-6 py-4">
-                    <h2 className="font-bold text-xl mb-2">{issue.title}</h2>
-                    <p className="text-gray-700 text-base mb-4 overflow-hidden overflow-ellipsis h-16 line-clamp-4">
-                      {issue.body}
-                    </p>
-                    <div className="mb-4 flex justify-end">
-                      {tags.map((tag, tagIndex) => (
-                        <span
-                          key={tagIndex}
-                          className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2"
-                        >
-                          {tag}
-                        </span>
-                      ))}
+                  <div>
+                    <div className="text-xl font-semibold text-gray-800">
+                      {issue.writer.firstName + " " + issue.writer.lastName}
                     </div>
-                    <Link to={"/blog"}>
-                      <button className="bg-[#FFD500] text-black py-1 px-4 mt-4 rounded-lg">
-                        Answer
-                      </button>
-                    </Link>
+                    <p className="text-gray-600 text-sm">
+                      {formatDate(issue.publishTime)}
+                    </p>
                   </div>
                 </div>
-              ))}
-          </div>
+                <hr className="border-t" />
+                <div className="px-6 py-4">
+                  <h2 className="font-bold text-xl mb-2">{issue.title}</h2>
+                  <p className="text-gray-700 text-base mb-4 overflow-hidden overflow-ellipsis h-16 line-clamp-4">
+                    {issue.body}
+                  </p>
+                  <div className="mb-4 flex justify-end">
+                    {tags_static.map((tag, tagIndex) => (
+                      <span
+                        key={tagIndex}
+                        className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 overflow-hidden"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                  <Link to={"/blog"}>
+                    <button className="bg-[#FFD500] text-black py-1 px-4 mt-4 rounded-lg">
+                      Answer
+                    </button>
+                  </Link>
+                </div>
+              </div>
+            ))}
         </div>
-      </>
+      </div>
       {/* Button to open the modal */}
       <button
         className="fixed bottom-8 right-8 bg-[#FFD500] text-black py-2 px-4 text-4xl rounded-full"
@@ -188,3 +228,6 @@ const Home = () => {
 };
 
 export default Home;
+
+
+
