@@ -55,7 +55,7 @@ const IssuePage = () => {
           body: solution,
         }),
       }).then((res) => {
-        // navigate(0);
+        navigate(0);
         console.log(res);
       });
     };
