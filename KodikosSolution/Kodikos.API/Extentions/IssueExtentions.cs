@@ -19,6 +19,22 @@ namespace Kodikos.API.Extentions
             };
         }
 
+        //public static IEnumerable<IssueReadDto> ToDto(this IEnumerable<Issue> issues,IEnumerable<Employee> employees)
+        //{
+        //    return from issue in issues 
+        //           join employee in employees
+        //           on issue.WriterId equals employee.EmployeeId
+        //           select new IssueReadDto()
+        //    {
+        //        Body = issue.Body,
+        //        WriterId = issue.WriterId,
+        //        IssueId = issue.IssueId,
+        //        Title = issue.Title,
+        //        Writer = employee.ToReadDto(),
+        //        PublishTime = issue.PublishTime.GetValueOrDefault(),
+        //    };
+        //}
+
         public static Issue ToEntity(this IssueCreateDto issue)
         {
             return new Issue()

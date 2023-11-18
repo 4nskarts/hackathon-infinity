@@ -16,5 +16,7 @@ namespace Kodikos.Models.Dtos.Issue
 
         public string Body { get; set; } = string.Empty!;
 
+        private List<string> Tags { get; set; } = new List<string>();
+
     }
 }

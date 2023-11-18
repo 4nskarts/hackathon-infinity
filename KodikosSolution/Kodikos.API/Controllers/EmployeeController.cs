@@ -80,7 +80,7 @@ namespace Kodikos.API.Controllers
 
         [HttpPost("login")]
 
-        public async Task<ActionResult<Tuple<EmployeeReadDto,string>>> Login([FromBody] EmployeeLoginDto loginEmployee)
+        public async Task<ActionResult<EmployeeReadDto>> Login([FromBody] EmployeeLoginDto loginEmployee)
         {
             Employee? employee = await this.employeeRepository.GetEmployee(loginEmployee.Email);
             

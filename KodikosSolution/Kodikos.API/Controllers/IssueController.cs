@@ -6,6 +6,10 @@ using Kodikos.Models.Dtos.Issue;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Kodikos.API.Extentions;
+using Kodikos.Models.Dtos.Tag;
+using System.ComponentModel.Design;
+using System.Collections.Generic;
+using System.Collections;
 
 namespace Kodikos.API.Controllers
 {
@@ -102,21 +106,26 @@ namespace Kodikos.API.Controllers
 
             Employee? employee = await this.employeeRepository.GetEmployee(issue.WriterId.GetValueOrDefault());
 
+            IssueReadDto readDto = issue.ToDto(employee);
+            //readDto.Tags = issueUpdateDto.Tags;
 
-            return Ok(issue.ToDto(employee));
+            return Ok(readDto);
         }
 
         [HttpPut]
-        public async Task<ActionResult<IssueReadDto>> UpdateIssue([FromBody] IssueUpdateDto issueCreateDto)
+        public async Task<ActionResult<IssueReadDto>> UpdateIssue([FromBody] IssueUpdateDto issueUpdateDto)
         {
-            Issue? issue = (await issueRepository.UpdateIssue(issueCreateDto.ToEntity()));
+            Issue? issue = (await issueRepository.UpdateIssue(issueUpdateDto.ToEntity()));
 
             if (issue == null) { return BadRequest("This Should not happen"); }
 
 
             Employee? employee = await this.employeeRepository.GetEmployee(issue.WriterId.GetValueOrDefault());
 
-            return Ok(issue.ToDto(employee));
+            IssueReadDto readDto = issue.ToDto(employee);
+            //readDto.Tags = issueUpdateDto.Tags;
+
+            return Ok( readDto );
         }
 
         [HttpDelete("{issueId}")]
@@ -156,7 +165,7 @@ namespace Kodikos.API.Controllers
                 {
                     foreach (string body_word in body_words)
                     {
-                        if (body_word.IndexOf(pattern_word) != -1)
+                        if (body_word.Contains(pattern_word))
                         {
                             if (issuesPriority.ContainsKey(issue))
                             {
@@ -172,7 +181,7 @@ namespace Kodikos.API.Controllers
 
                     foreach (string title_word in body_words)
                     {
-                        if (title_word.IndexOf(pattern_word) != -1)
+                        if (title_word.Contains(pattern_word))
                         {
                             if (issuesPriority.ContainsKey(issue))
                             {
@@ -200,6 +209,51 @@ namespace Kodikos.API.Controllers
             return Ok( OrdredIssues );
         }
 
+        [HttpPost("{companyId}/Tags")]
+        public async Task<IEnumerable<IssueReadDto>> SearchByTags(int companyId,[FromBody] TagSearchList tagList)
+        {
+            IEnumerable<Issue> issues = (await GetAllIssues(companyId)).Value;
+            var issueAsDto = issues.ToDto(await this.employeeRepository.GetEmployees(companyId));
+
+            List<IssueReadDto> result = new List<IssueReadDto>();
+
+            foreach(IssueReadDto issue in issueAsDto)
+            {
+                if (AllTagsExist(issue))
+                {
+                    result.Add(issue);
+                }
+            }
+
+            return issueAsDto;
+
+
+            bool AllTagsExist(IssueReadDto issueReadDto)
+            {
+                int Counter = 0;
+
+                foreach(string tag1 in tagList.Tags)
+                {
+                    foreach(string tag2 in issueReadDto.Tags)
+                    {
+                        if (tag1==tag2)
+                        {
+                            Counter++;
+                            break;
+                        }
+                    }
+                }
+
+                if(Counter == tagList.Tags.Count)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
         
     }
 }
