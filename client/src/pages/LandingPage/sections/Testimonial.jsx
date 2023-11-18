@@ -29,35 +29,28 @@ export default function Testimonial() {
   const testimonialData = [
     {
       text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec hendrerit ligula.",
-      author: "━━━━━━   Simohammed Nassim   ━━━━━━",
+      author: "━━━━━━   Mohammed Redha   ━━━━━━",
       imageUrl:
         "https://i.pinimg.com/originals/f7/03/af/f703af92214c1f8787d386dab6d5e7b5.jpg",
     },
     {
       text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec hendrerit ligula.",
-      author: "━━━━━━   Gojo Satoru   ━━━━━━",
+      author: "━━━━━━   Mohammed Zakaria   ━━━━━━",
       imageUrl:
         "https://i.pinimg.com/originals/f7/03/af/f703af92214c1f8787d386dab6d5e7b5.jpg",
     },
     {
       text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec hendrerit ligula.",
-      author: "━━━━━━   Sukuna kadirou   ━━━━━━",
+      author: "━━━━━━   Abdel Kader shikh   ━━━━━━",
       imageUrl:
         "https://i.pinimg.com/originals/7a/0c/d7/7a0cd70f4ddc2230661f6d9793dc5f77.jpg",
     },
     {
       text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec hendrerit ligula.",
-      author: "━━━━━━   Luffy OnePiece   ━━━━━━",
+      author: "━━━━━━   Houdaifa Mniwel   ━━━━━━",
       imageUrl:
         "https://i.pinimg.com/originals/d0/46/9a/d0469aa7401e6114bb19eb6cfb6b6401.png",
-    },
-    {
-      text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec hendrerit ligula.",
-      author: "━━━━━━   Simohammed Nassim   ━━━━━━",
-      imageUrl:
-        "https://i.pinimg.com/originals/f7/03/af/f703af92214c1f8787d386dab6d5e7b5.jpg",
-    },
-    // ... (other testimonial items)
+    }
   ];
 
   const settings = {
@@ -93,7 +86,7 @@ export default function Testimonial() {
   };
 
   return (
-    <div className="carousel ">
+    <div className="carousel" id="testimonial">
       <Slider ref={slider} {...settings}>
         {testimonialData.map((testimonial, index) => (
           <div key={index}>

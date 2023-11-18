@@ -31,7 +31,8 @@ function LoginPage() {
     return (
       <div className="flex min-h-full h-screen flex-1 flex-col border-2 justify-center items-center px-6 py-12 lg:px-8 ">
         <div className="mx-auto w-auto text-2xl font-bold">
-          Infinity Website
+          WELCOME TO <span className="text-[#FFD500]">C</span>
+          <span className="text-[#407CB6]">REVIX</span>
         </div>
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <h2 className="mt-10 text-center text-2xl font-base leading-9 tracking-tight text-black">

@@ -12,7 +12,7 @@ import Footer from "./sections/Footer";
 
 function LandingPage() {
     return (
-      <main className="flex flex-col bg-[#D9D9D9] font-Quicksand">
+      <main className="flex flex-col bg-[#D9D9D9] font-Quicksand" id="home">
         <Navbar />
         <Hero />
         {/* <CallToAction /> */}

@@ -11,3 +11,8 @@
 body {
     min-height: 100vh;
 }
+
+img {
+    border: none !important;
+    border-radius: none !important;
+}

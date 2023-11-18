@@ -5,10 +5,13 @@ import LoginPage from "./pages/LoginPage/index";
 import Home from "./pages/HomePage/Home";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import IssuePage from "./pages/IssuePage/IssuePage";
-
-// This is static now, don't remove it
+import ContactUsPage from "./pages/ContactUsPage";
+import { useEffect } from "react";
 
 function App() {
+    useEffect(() => {
+        document.body.classList.add("font-poppins")
+    }, [])
     return (
         <Router>
             <Routes>
@@ -17,9 +20,11 @@ function App() {
                 <Route path="/home" element={<Home />} />
                 <Route path="/profile" element={<ProfilePage />} />
                 <Route path="/issue/:id" element={<IssuePage />} />
+                <Route path="/contactus" element={<ContactUsPage/>} />
             </Routes>
         </Router>
     );
 }
 
 export default App;
+    
