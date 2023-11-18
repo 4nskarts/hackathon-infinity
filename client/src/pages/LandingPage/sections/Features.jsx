@@ -19,9 +19,9 @@ function FeatureSection({ title, description, buttonText, reversed = false }) {
         {/* Right Section */}
         <div className="flex max-w-lg gap-2 m-auto flex-col items-start">
           <div className="text-start  font-semibold text-h4 ">{title}</div>
-          <ul className="my-6  text-start list-disc list-inside">
+          <ul className="my-6 text-start list-disc list-inside">
             {description.map((point, index) => (
-              <li className="mt-2" key={index}>
+              <li className="mb-2" key={index}>
                 {point}
               </li>
             ))}
