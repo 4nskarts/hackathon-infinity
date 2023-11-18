@@ -1,28 +1,24 @@
 import React from "react";
 import ThirdButton from "../../../components/ThirdButton";
-import image1 from "../styles/assets/Frame 18.svg";
-import image2 from "../styles/assets/Ppl2.svg";
-import image3 from "../styles/assets/Group 1.svg";
 import HandshakeIcon from "../../../assets/business-handshake.svg";
 import TopIcon from "../../../assets/business-top.svg";
 
 function FeatureSection({ title, description, buttonText, reversed = false }) {
   const flexClass = reversed
-    ? "md:flex-row-reverse bg-[#eef2f3]"
-    : "md:flex-row bg-white";
+    ? "justify-between md:flex-row-reverse px-5 bg-[#eef2f3]"
+    : "md:flex-row px-5 bg-white ";
 
   return (
-    <section className={`w-full  ${flexClass}`}>
-      <div className={`flex ${flexClass}`}>
+    <section className={`w-full ${flexClass}`}>
+      <div className={`flex justify-center items-center ${flexClass}`}>
         <img
           src={reversed ? HandshakeIcon : TopIcon}
-          className="w-0 h-screen border-0 md:w-1/2 flex justify-center items-center"
+          className="h-screen border-0 items-center md:w-1/2 "
         ></img>
-
         {/* Right Section */}
-        <div className="flex max-w-lg m-auto flex-col items-center justify-start">
-          <div className="text-center font-semibold text-h4 ">{title}</div>
-          <div className="p-9 text-center">{description}</div>
+        <div className="flex max-w-lg m-auto flex-col  items-start">
+          <div className="text-start font-semibold text-h4 ">{title}</div>
+          <div className="my-6 text-start items-start ">{description}</div>
           <ThirdButton text={buttonText} />
         </div>
       </div>
@@ -32,10 +28,10 @@ function FeatureSection({ title, description, buttonText, reversed = false }) {
 
 function Features() {
   return (
-    <>
+    <div id="features">
       <FeatureSection
-        title="Synergize Solutions: Empower Your Team with Collaborative Mastery"
-        description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+        title="Enhance the productivity in you entreprise"
+        description="Post your issues and tap into the collective wisdom of the team. This is lorem ipsum Post your issues and tap into the collective wisdom of the team"
         buttonText="Learn more"
         reversed={false}
       />
@@ -45,7 +41,7 @@ function Features() {
         buttonText="Learn more"
         reversed={true}
       />
-    </>
+    </div>
   );
 }
 

@@ -93,7 +93,7 @@ export default function Testimonial() {
   };
 
   return (
-    <div className="carousel ">
+    <div className="carousel" id="testimonial">
       <Slider ref={slider} {...settings}>
         {testimonialData.map((testimonial, index) => (
           <div key={index}>

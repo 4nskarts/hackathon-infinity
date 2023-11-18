@@ -277,15 +277,15 @@ const Home = () => {
         )}
         <NavbarHome setIssues={setIssues} />
         <div className="mt-16 ">
-          <div className="flex-col h-full md:h-screen items-center flex md:grid grid-cols-1 md:grid-cols-2 bg-gray-200 lg:grid-cols-4 gap-0 p-8">
+          <div className="flex-col h-full md:h-full items-center flex md:grid grid-cols-1 md:grid-cols-2 bg-gray-200 lg:grid-cols-4 gap-0 p-8">
             {issues &&
               issues.map((issue, index) => (
                 <div
                   key={index}
                   className="max-w-sm mx-2 my-8 bg-white shadow-lg rounded-lg"
                 >
-                  <div className="flex justify-center items-center px-6 py-4">
-                    <div className="flex justify-center items-center">
+                  <div className="flex h-20 w-auto overflow-hidden justify-start items-center px-6 py-4">
+                    <div className="flex w-12 h-auto justify-center items-center">
                       <img
                         src="https://i.pinimg.com/originals/98/1d/6b/981d6b2e0ccb5e968a0618c8d47671da.jpg"
                         alt="User Profile"
@@ -293,7 +293,7 @@ const Home = () => {
                       ></img>
                     </div>
                     <div>
-                      <div className="text-xl font-semibold text-gray-800">
+                      <div className="text-sm font-semibold text-gray-800">
                         {issue.writer.firstName + " " + issue.writer.lastName}
                       </div>
                       <p className="text-gray-600 text-sm">
@@ -303,7 +303,9 @@ const Home = () => {
                   </div>
                   <hr className="border-t" />
                   <div className="px-6 py-4">
-                    <h2 className="font-bold text-xl mb-2">{issue.title}</h2>
+                    <h2 className="font-bold text-xl mb-2 overflow-hidden">
+                      {issue.title}
+                    </h2>
                     <p className="text-gray-700 text-base mb-4 overflow-hidden overflow-ellipsis h-16 line-clamp-4">
                       {issue.body}
                     </p>
