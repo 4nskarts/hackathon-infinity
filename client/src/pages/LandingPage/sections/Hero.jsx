@@ -3,7 +3,10 @@ import SecondaryButton from "../../../components/SecondaryButton";
 import shape from "../styles/assets/Group 1(1).svg";
 import Logo from "../../../assets/business-meeting.svg";
 import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
 function Hero() {
+  const navigate = useNavigate();
   return (
     <section className="h-screen  bg-[#eef2f3] pt-16 flex flex-col md:flex-row px-12 justify-around items-center">
       <div className="flex flex-col md:w-[457px] justify-between">
@@ -21,7 +24,7 @@ function Hero() {
           solves issues, unlocking the full potential of shared expertise
         </p>
         <div className="flex flex-col md:flex-row gap-4">
-          <button className="py-2.5 text-sm border-2 border-yellow hidden sm:inline px-10 rounded-lg bg-yellow text-black">
+          <button onClick={() => navigate('/contactus')} className="py-2.5 text-sm border-2 border-yellow hidden sm:inline px-10 rounded-lg bg-yellow text-black">
             Get Started
           </button>
           <NavLink to={"/login"}>

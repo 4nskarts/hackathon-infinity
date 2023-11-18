@@ -14,7 +14,8 @@ module.exports = {
     extend: {
       fontFamily: {
         'Quicksand': ['Quicksand', 'sans-serif'],
-      },
+        'poppins': ['poppins'],
+    },
       colors: {
         'black': '#000000',
         'dark-grey': '#191919',

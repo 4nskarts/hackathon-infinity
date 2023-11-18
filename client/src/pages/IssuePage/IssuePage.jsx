@@ -56,7 +56,6 @@ const IssuePage = () => {
         }),
       }).then((res) => {
         navigate(0);
-        console.log(res);
       });
     };
     const renderBlogBody = (body) => {
