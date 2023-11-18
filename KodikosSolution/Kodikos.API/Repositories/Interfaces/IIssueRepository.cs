@@ -13,5 +13,7 @@ namespace Kodikos.API.Repositories.Interfaces
         Task<Issue?> UpdateIssue(Issue issue);
 
         Task<bool> DeleteIssue(int id);   
+
+
     }
 }
